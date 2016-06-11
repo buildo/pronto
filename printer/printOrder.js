@@ -25,6 +25,10 @@ module.exports = ({ referencePhoneNumber, peopleOrders }) => new Promise((resolv
 
   const messageForPrinter = header + body + footer;
 
+  console.log('-----------------------------------');
+  console.log(`${header}${body}`);
+  console.log('-----------------------------------');
+
   fs.appendFile('/dev/usb/lp0', messageForPrinter, 'binary', err => {
     if (err) {
       reject(err);
