@@ -1,1 +1,4 @@
-export const transitionReducer = s => s;
+export const transitionReducer = ({ view, ...state }) => ({
+  ...state,
+  view: view || 'restaurants'
+});
