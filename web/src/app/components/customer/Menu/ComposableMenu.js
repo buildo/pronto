@@ -1,5 +1,5 @@
 import React from 'react';
-import includes from 'lodash/includes';
+import remove from 'lodash/remove';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
 import { Menu } from 'model';
@@ -19,13 +19,10 @@ export default class ComposableMenu extends React.Component {
     value: []
   }
 
-  toggleMenuItem = menuItemName => {
+  toggleMenuItem = ({ toAdd = [], toRemove }) => {
     const { value, onChange } = this.props;
-    if (includes(value, menuItemName)) {
-      onChange(value.filter(personItem => personItem !== menuItemName));
-    } else {
-      onChange(value.concat(menuItemName));
-    }
+
+    onChange(remove(value, toRemove).concat(toAdd));
   }
 
   getLocals() {
