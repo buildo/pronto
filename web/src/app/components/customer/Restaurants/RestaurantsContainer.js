@@ -7,8 +7,8 @@ export default container(Restaurants, {
   queries: ['restaurants'],
   loadingDecorator,
   mapProps: ({ transition, restaurants }) => ({
-    onRestaurantClick: (restaurantId) => {
-      transition({ restaurantId });
+    onRestaurantClick: (restaurantId) => () => {
+      transition({ view: 'restaurant', restaurantId });
     },
     restaurants
   })

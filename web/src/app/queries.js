@@ -4,6 +4,7 @@ import * as API from 'API';
 import { Menu, Restaurant, SubmittedOrder } from 'model';
 
 const restaurantFixture = Restaurant({
+  _id: 'dmiojdeinuinfuiw',
   menu: {
     description: 'Primo e secondo 10€',
     groups: [{

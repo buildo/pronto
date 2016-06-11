@@ -44,6 +44,7 @@ export const SubmittedOrder = t.refinement(Order, order => {
 }, 'SubmittedOrder');
 
 export const Restaurant = t.interface({
+  _id: t.String,
   menu: Menu,
   profile: RestaurantProfile,
   // account: FirebasAccount,
