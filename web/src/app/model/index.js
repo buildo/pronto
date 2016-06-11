@@ -2,6 +2,7 @@ import t from 'tcomb';
 
 export const MenuItem = t.interface({
   name: t.String,
+  price: t.maybe(t.Number),
   description: t.maybe(t.String)
 }, { name: 'MenuItem', strict: true });
 
