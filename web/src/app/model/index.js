@@ -20,7 +20,8 @@ export const RestaurantProfile = t.interface({
   name: t.String,
   description: t.maybe(t.String),
   telephone: t.String,
-  address: t.String
+  address: t.String,
+  imgURL: t.String
 }, { name: 'RestaurantProfile', strict: true });
 
 export const Person = t.interface({

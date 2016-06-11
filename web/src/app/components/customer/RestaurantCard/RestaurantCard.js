@@ -16,16 +16,16 @@ import './img/time-icon.png';
 export default class RestaurantCard extends React.Component {
 
   getLocals() {
-    const { name, address, imageURL } = this.props.profile;
+    const { name, address, imgURL } = this.props.profile;
     const onClick = this.props.onClick;
     // const [timeStart, timeEnd] = timeSlot;
-    return { name, address, imageURL, onClick };
+    return { name, address, imgURL, onClick };
   }
 
-  template({ name, imageURL, address, onClick }) {
+  template({ name, imgURL, address, onClick }) {
     return (
       <div className='restaurant-card' onClick={onClick}>
-        <img src={imageURL} alt={name} />
+        <img src={imgURL} alt={name} />
         <div className='description'>
           <div className='description-container'>
             <p className='name'>{name}</p>

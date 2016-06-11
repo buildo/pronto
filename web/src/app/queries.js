@@ -28,7 +28,8 @@ const restaurantFixture = Restaurant({
     name: 'Blue Ginger',
     description: 'Asian food',
     telephone: '02 123432432',
-    address: 'via Tortona 35, Milano'
+    address: 'via Tortona 35, Milano',
+    imgURL: 'https://cdn0.deliveroo.co.uk/media/restaurants/18077/1140x640.jpg'
   },
   open: true,
   maxPeoplePerOrder: 10,
