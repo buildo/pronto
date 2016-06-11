@@ -7,7 +7,7 @@ A nodejs server that listens to restaurant orders on firebase and prints them
 - copy this directory to the Raspberry
   - `rsync -rav --exclude='node_modules' --exclude='*.cast5' . pi@<raspberry_ip>:/home/pi/pronto`
 - connect via ssh to the raspberry
-  - `ssh pi@<raspberry_id>`
+  - `ssh pi@<raspberry_ip>`
 - `cd pronto`
 - `npm install`
 - `sudo node index <restaurantId>`
