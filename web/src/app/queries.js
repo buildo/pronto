@@ -1,7 +1,39 @@
 import { Query } from 'avenger';
 import t from 'tcomb';
 import * as API from 'API';
-import { Restaurant, SubmittedOrder } from 'model';
+import { Menu, Restaurant, SubmittedOrder } from 'model';
+
+const restaurantFixture = Restaurant({
+  menu: {
+    description: 'Primo e secondo 10€',
+    groups: [{
+      name: 'Primi',
+      items: [{
+        name: 'Spaghetti alla Carbonara',
+        description: 'Con pancetta di qualità'
+      }, {
+        name: 'Simcoe',
+        description: '200g di carne bovina'
+      }]
+    }, {
+      name: 'Secondi',
+      items: [{
+        name: 'Zigoiner',
+        description: 'Su palo di abete'
+      }]
+    }]
+  },
+  profile: {
+    name: 'Blue Ginger',
+    description: 'Asian food',
+    telephone: '02 123432432',
+    address: 'via Tortona 35, Milano'
+  },
+  open: true,
+  maxPeoplePerOrder: 10,
+  orders: []
+});
+
 
 export const user = Query({
   id: 'user',
@@ -12,27 +44,24 @@ export const user = Query({
 export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
-  fetch: () => Promise.resolve([{
-    menu: {
-      description: 'Primo e secondo 10€',
-      groups: [{
-        name: 'Primi',
-        items: [{
-          name: 'Spaghetti alla Carbonara',
-          description: 'Con pancetta di qualità'
-        }]
-      }]
-    },
-    profile: {
-      name: 'Blue Ginger',
-      description: 'Asian food',
-      telephone: '02 123432432',
-      address: 'via Tortona 35, Milano'
-    },
-    open: true,
-    maxPeoplePerOrder: 10,
-    orders: []
-  }].map(Restaurant))
+  fetch: () => Promise.resolve([ restaurantFixture ])
+});
+
+export const restaurant = Query({
+  id: 'restaurant',
+  returnType: Restaurant,
+  fetch: (/* { restaurantId }*/) => Promise.resolve(restaurantFixture)
+});
+
+export const menu = Query({
+  id: 'menu',
+  dependencies: {
+    restaurant: {
+      query: restaurant
+    }
+  },
+  returnType: Menu,
+  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu)
 });
 
 export const orders = Query({

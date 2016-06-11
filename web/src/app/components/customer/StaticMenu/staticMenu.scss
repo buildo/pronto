@@ -1,0 +1,17 @@
+.menu {
+  .groups {
+    border: 1px solid red;
+    padding: 10px;
+
+    .group {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid green;
+
+      .items {
+        padding: 10px;
+        border: 1px solid blue;
+      }
+    }
+  }
+}
