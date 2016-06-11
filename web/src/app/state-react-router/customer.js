@@ -1,5 +1,5 @@
-import routes from '../routes/customer';
-import _isViewActive from 'state-react-router/isViewActive';
+// import routes from '../routes/customer';
+// import _isViewActive from 'state-react-router/isViewActive';
 import routerDiff from 'state-react-router/routerDiff';
 
 const routerStateKey = 'view';
@@ -17,4 +17,4 @@ export const {
   ignoreParams
 });
 
-export const isViewActive = _isViewActive(routes);
+// export const isViewActive = _isViewActive(routes);
