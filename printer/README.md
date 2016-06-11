@@ -10,5 +10,5 @@ A nodejs server that listens to restaurant orders on firebase and prints them
   - `ssh pi@<raspberry_id>`
 - `cd pronto`
 - `npm install`
-- `node index <restaurantId>`
+- `sudo node index <restaurantId>`
 - 🎉
