@@ -1,8 +1,7 @@
 // import t from 'tcomb';
 import Orders from './Orders';
-import container from 'react-container';
-import allQueries from 'queries';
+import container from 'container';
 
-export default container({ allQueries })(Orders, {
+export default container(Orders, {
   // queries: ['orders']
 });
