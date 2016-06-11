@@ -1,5 +1,6 @@
 const args = process.argv.slice(2);
 const restaurantId = process.env.RESTAURANT_ID || args[0];
+const Gpio = require('onoff').Gpio;
 
 if (!restaurantId) {
   console.log('Error! Missing restaurantId!');
@@ -34,6 +35,13 @@ function updateLedStatus(status) {
   const s = status ? 'ON' : 'OFF';
   console.log(`The led is now ${s}`);
 }
+
+const toggleOpenStatus = require('./toggleOpenStatus');
+const button = new Gpio(17, 'in', 'falling');
+button.watch((err,value) => {
+  toggleOpenStatus();
+  console.log("open status toggled");
+});
 
 console.log(`Welcome to restaurant ${restaurantId}`);
 console.log('Listening for new orders...');
