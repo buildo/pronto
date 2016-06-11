@@ -1,7 +1,7 @@
 import client from './index';
 import { transitionReducer } from '../app/transitions/restaurant';
-import queries from '../app/queries';
-import commands from '../app/commands';
+import * as queries from '../app/queries';
+import * as commands from '../app/commands';
 import routes from '../app/routes/restaurant';
 
 const initialState = {

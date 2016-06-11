@@ -1,7 +1,23 @@
 import React from 'react';
+import { skinnable, pure } from 'revenge';
+import { t, props } from 'tcomb-react';
+import { SubmittedOrder } from 'model';
 
+@skinnable()
+@pure
+@props({
+  orders: t.list(SubmittedOrder)
+})
 export default class Orders extends React.Component {
-  render() {
-    return <div>orders...</div>;
+  templateOrder = order => (
+    <div key={order.id}>{order.id} ({order.people.length} people)</div>
+  );
+
+  template({ orders }) {
+    return (
+      <div>
+        {orders.map(this.templateOrder)}
+      </div>
+    );
   }
 }

@@ -1,9 +1,8 @@
 import t from 'tcomb';
 import Login from './Login';
-import container from 'react-container';
-import allCommands from 'commands';
+import container from 'container';
 
-export default container({ allCommands })(Login, {
+export default container(Login, {
   connect: { token: t.maybe(t.String) },
   commands: ['doLogin'],
   mapProps: ({ transition, doLogin }) => ({

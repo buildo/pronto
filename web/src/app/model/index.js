@@ -27,13 +27,21 @@ export const Person = t.interface({
   items: t.list(t.String) // fk MenuItem.name
 }, { name: 'Person', strict: true });
 
-export const Order = t.interface({
+export const OrderStatus = t.enums.of(['submitted', 'pending'], 'OrderStatus');
+
+export const Order = t.refinement(t.interface({
   id: t.String, // client session id
   // createdAt: t.Date,
-  status: t.enums.of(['submitted', 'pending']),
+  status: OrderStatus,
   referencePhoneNumber: t.maybe(t.String), // must be there before submit
   people: t.list(Person)
-}, { name: 'Order', strict: true });
+}, { strict: true }), order => {
+  return order.status === OrderStatus('pending') || order.people.length > 0;
+}, 'Order');
+
+export const SubmittedOrder = t.refinement(Order, order => {
+  return order.status === OrderStatus('submitted');
+}, 'SubmittedOrder');
 
 export const Restaurant = t.interface({
   menu: Menu,
@@ -41,5 +49,5 @@ export const Restaurant = t.interface({
   // account: FirebasAccount,
   open: t.Boolean, // on/off
   maxPeoplePerOrder: t.Integer,
-  orders: t.list(Order)
+  orders: t.list(SubmittedOrder)
 }, { name: 'Restaurant', strict: true });
