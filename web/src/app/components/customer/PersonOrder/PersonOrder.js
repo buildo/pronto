@@ -1,5 +1,6 @@
 import React from 'react';
+import Menu from '../Menu';
 
 export default class PersonOrder extends React.Component {
-  render = () => <div>Person order goes here...</div>
+  render = () => <Menu />
 }

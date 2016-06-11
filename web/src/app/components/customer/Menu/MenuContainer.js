@@ -4,12 +4,12 @@ import loadingDecorator from 'loading';
 import Menu from './Menu';
 
 export default container(Menu, {
-  connect: { personItems: t.maybe(t.list(t.String)), personName: t.maybe(t.String) },
+  connect: { personItems: t.maybe(t.list(t.String)), personId: t.maybe(t.String) },
   loadingDecorator,
   queries: ['menu'],
-  mapProps: ({ personItems = [], menu, transition, personName }) => ({
+  mapProps: ({ personItems = [], menu, transition, personId }) => ({
     menu,
-    isStatic: !personName,
+    isStatic: !personId,
     value: personItems,
     onChange: personItems => transition({ personItems })
   })
