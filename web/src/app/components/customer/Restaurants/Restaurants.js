@@ -14,7 +14,7 @@ export default class Restaurants extends React.Component {
 
   templateRestaurant = (onRestaurantClick) => (restaurant, key) => (
     <FlexView key={key} onClick={onRestaurantClick}>
-      {restaurant.name}
+      {restaurant.profile.name}
     </FlexView>
   )
 

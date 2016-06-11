@@ -1,15 +1,15 @@
-import t from 'tcomb';
 import Restaurants from './Restaurants';
-import container from 'react-container';
-import allQueries from 'queries';
-import { Restaurant } from 'model';
+import container from 'container';
+import loadingDecorator from 'loading';
 
-export default container({ allQueries })(Restaurants, {
-  connect: { restaurants: t.list(Restaurant) },
+export default container(Restaurants, {
+  connect: { },
   queries: ['restaurants'],
-  mapProps: ({ transition }) => ({
+  loadingDecorator,
+  mapProps: ({ transition, restaurants }) => ({
     onRestaurantClick: (restaurantId) => {
       transition({ restaurantId });
-    }
+    },
+    restaurants
   })
 });
