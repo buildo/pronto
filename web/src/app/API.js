@@ -1,4 +1,4 @@
-import map from 'lodash/map';
+const map = v => Object.keys(v).map(_id => ({ ...v[_id], _id }));
 
 const baseUrl = 'https://pronto-9842a.firebaseio.com/';
 
@@ -15,9 +15,13 @@ export const getUser = () => {
 };
 
 export const getRestaurants = () => {
-  return ProntoAPI.get('restaurants').then(map);
+  return ProntoAPI.get('restaurants').then(map).then(restaurants => restaurants.map(r => ({
+    ...r, menu: { ...r.menu, groups: map(r.menu.groups) }
+  })));
 };
 
 export const getRestaurant = (rid) => {
-  return ProntoAPI.get(`restaurants/${rid}`);
+  return ProntoAPI.get(`restaurants/${rid}`).then(r => ({
+    ...r, _id: rid, menu: { ...r.menu, groups: map(r.menu.groups) }
+  }));
 };

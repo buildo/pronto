@@ -12,7 +12,7 @@ export const user = Query({
 export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
-  fetch: () => API.getRestaurants().then(restaurants => console.log(restaurants)) //eslint-disable-line
+  fetch: API.getRestaurants
 });
 
 export const restaurant = Query({

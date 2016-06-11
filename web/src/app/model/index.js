@@ -7,22 +7,15 @@ export const MenuItem = t.interface({
 }, { name: 'MenuItem', strict: true });
 
 export const MenuGroup = t.interface({
-  name: t.String,
-  items: t.list(MenuItem)
+  _id: t.String,
+  description: t.String,
+  items: t.maybe(t.list(MenuItem))
 }, { name: 'MenuGroup', strict: true });
 
 export const Menu = t.interface({
   description: t.maybe(t.String),
   groups: t.list(MenuGroup)
 }, { name: 'Menu', strict: true });
-
-export const RestaurantProfile = t.interface({
-  name: t.String,
-  description: t.maybe(t.String),
-  telephone: t.String,
-  address: t.String,
-  imgURL: t.String
-}, { name: 'RestaurantProfile', strict: true });
 
 export const Person = t.interface({
   name: t.String,
@@ -48,9 +41,12 @@ export const SubmittedOrder = t.refinement(Order, order => {
 export const Restaurant = t.interface({
   _id: t.String,
   menu: Menu,
-  profile: RestaurantProfile,
+  name: t.String,
+  description: t.maybe(t.String),
+  telephone: t.String,
+  address: t.String,
   // account: FirebasAccount,
   open: t.Boolean, // on/off
-  maxPeoplePerOrder: t.Integer,
-  orders: t.list(SubmittedOrder)
+  maxPeopleNumber: t.Integer//,
+  // orders: t.list(SubmittedOrder)
 }, { name: 'Restaurant', strict: true });
