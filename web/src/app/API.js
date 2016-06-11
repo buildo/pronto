@@ -1,5 +1,3 @@
-const map = v => Object.keys(v).map(_id => ({ ...v[_id], _id }));
-
 const baseUrl = 'https://pronto-9842a.firebaseio.com/';
 
 const PAPI = {
@@ -36,17 +34,9 @@ export const getUser = () => {
   });
 };
 
-export const getRestaurants = () => {
-  return PAPI.get('restaurants').then(map).then(restaurants => restaurants.map(r => ({
-    ...r, menu: { ...r.menu, groups: map(r.menu.groups) }
-  })));
-};
+export const getRestaurants = () => PAPI.get('restaurants');
 
-export const getRestaurant = (rid) => {
-  return PAPI.get(`restaurants/${rid}`).then(r => ({
-    ...r, _id: rid, menu: { ...r.menu, groups: map(r.menu.groups) }
-  }));
-};
+export const getRestaurant = (rid) => PAPI.get(`restaurants/${rid}`);
 
 export const putRestaurant = (rid, body) => {
   return PAPI.put(`restaurants/${rid}`, body);

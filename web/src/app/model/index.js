@@ -1,13 +1,13 @@
 import t from 'tcomb';
 
 export const MenuItem = t.interface({
+  shortName: t.String,
   name: t.String,
   price: t.maybe(t.Number),
   description: t.maybe(t.String)
 }, { name: 'MenuItem', strict: true });
 
 export const MenuGroup = t.interface({
-  _id: t.String,
   description: t.String,
   items: t.maybe(t.list(MenuItem))
 }, { name: 'MenuGroup', strict: true });
@@ -39,7 +39,6 @@ export const SubmittedOrder = t.refinement(Order, order => {
 }, 'SubmittedOrder');
 
 export const Restaurant = t.interface({
-  _id: t.String,
   menu: Menu,
   name: t.String,
   description: t.maybe(t.String),
@@ -47,6 +46,7 @@ export const Restaurant = t.interface({
   address: t.String,
   // account: FirebasAccount,
   open: t.Boolean, // on/off
-  maxPeopleNumber: t.Integer//,
+  maxPeopleNumber: t.Integer,
+  imgUrl: t.maybe(t.String)//,
   // orders: t.list(SubmittedOrder)
 }, { name: 'Restaurant', strict: true });
