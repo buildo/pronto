@@ -13,7 +13,7 @@ import { Restaurant } from 'model';
 export default class Restaurants extends React.Component {
 
   templateRestaurant = (onRestaurantClick) => (restaurant, key) => (
-    <FlexView key={key} onClick={onRestaurantClick}>
+    <FlexView key={key} onClick={onRestaurantClick(restaurant._id)}>
       {restaurant.profile.name}
     </FlexView>
   )
