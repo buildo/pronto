@@ -57,7 +57,7 @@ export default class MenuGroup extends React.Component {
   template({ name, ...locals }) {
     return (
       <FlexView className='menu-group' column>
-        <h3>{name}</h3>
+        <div className='group-name'>{name}</div>
         <FlexView className='menu-items' column>
           {this.templateMenuItems(locals)}
         </FlexView>

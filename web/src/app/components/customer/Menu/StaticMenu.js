@@ -4,6 +4,7 @@ import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
 import { Menu as MenuType } from 'model';
 import MenuGroup from './MenuGroup';
+import MenuDescription from './MenuDescription';
 
 import '../Menu/menu.scss';
 
@@ -13,12 +14,13 @@ import '../Menu/menu.scss';
 })
 export default class StaticMenu extends React.Component {
 
-  template({ menu }) {
+  template({ menu: { groups, description } }) {
     return (
       <FlexView className='static-menu' column shrink={false}>
-        <h2>{menu.description}</h2>
+        <div className='menu-title'>MENU</div>
+        {description && <MenuDescription description={description} />}
         <FlexView className='menu-groups' hAlignContent='center' column>
-          {menu.groups.map((menuGroup, i) => <MenuGroup {...menuGroup} key={i} />)}
+          {groups.map((menuGroup, i) => <MenuGroup {...menuGroup} key={i} />)}
         </FlexView>
       </FlexView>
     );

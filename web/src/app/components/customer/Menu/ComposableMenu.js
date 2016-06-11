@@ -4,6 +4,7 @@ import { pure, skinnable } from 'revenge';
 import { Menu } from 'model';
 import FlexView from 'FlexView';
 import MenuGroup from './MenuGroup';
+import MenuDescription from './MenuDescription';
 
 @pure
 @skinnable()
@@ -45,7 +46,8 @@ export default class ComposableMenu extends React.Component {
   template({ description, groups, personItems, toggleMenuItem }) {
     return (
       <FlexView className='composable-menu' column shrink={false}>
-        <h2>{description}</h2>
+        <div className='menu-title'>MENU</div>
+        {description && <MenuDescription description={description} />}
         <FlexView className='menu-groups' hAlignContent='center' column>
           {this.templateGroups({ groups, personItems, toggleMenuItem })}
         </FlexView>

@@ -29,11 +29,11 @@ export default class MenuItem extends React.Component {
     return (
       <FlexView {...{ className, onClick }}>
         <FlexView grow column>
-          <div className='name'>{name}</div>
-          <div className='description'>{description}</div>
+          <div className='item-name'>{name}</div>
+          <div className='item-description'>{description}</div>
         </FlexView>
-        <FlexView marginLeft='auto' shrink={false}>
-          {price && <div className='price'>{price}</div>}
+        <FlexView marginLeft='auto' shrink={false} vAlignContent='center'>
+          {price && <div className='item-price'>{price}</div>}
           {onClick && <input className='checkbox' readOnly checked={selected} type='checkbox' />}
         </FlexView>
       </FlexView>
