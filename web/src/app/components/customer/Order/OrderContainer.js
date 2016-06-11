@@ -7,10 +7,10 @@ export default container(Order, {
   queries: ['order'],
   mapProps: ({ transition, doAddPersonToOrder, doDeletePersonFromOrder, order }) => ({
     order,
-    onAddPersonClick: (personName) => doAddPersonToOrder(personName),
-    onPersonClick: (personName) => () => {
-      transition({ view: 'personOrder', personName });
+    onAddPersonClick: (personId) => doAddPersonToOrder(personId),
+    onPersonClick: (personId) => () => {
+      transition({ view: 'personOrder', personId });
     },
-    onDeletePersonClick: (personName) => doDeletePersonFromOrder(personName)
+    onDeletePersonClick: (personId) => doDeletePersonFromOrder(personId)
   })
 });
