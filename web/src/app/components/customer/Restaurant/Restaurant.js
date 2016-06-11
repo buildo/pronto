@@ -1,7 +1,6 @@
 import React from 'react';
 import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
-import RightSidebar from 'customer/RightSidebar';
 import { FlexView } from 'Basic';
 import { Restaurant as RestaurantType } from 'model';
 
@@ -22,9 +21,6 @@ export default class Restaurant extends React.Component {
             <FlexView className='menu-container' grow>
               Menu goes here...
             </FlexView>
-            <RightSidebar>
-              Order goes here...
-            </RightSidebar>
           </FlexView>
         </FlexView>
       </FlexView>
