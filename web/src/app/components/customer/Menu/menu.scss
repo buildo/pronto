@@ -1,20 +1,34 @@
 .static-menu, .composable-menu {
+  width: 588px;
+  text-align: left;
+
   .menu-groups {
-    border: 1px solid red;
+    width: 100%;
     padding: 10px;
 
     .menu-group {
+      width: 100%;
       margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid green;
 
       .menu-items {
-        padding: 10px;
-        border: 1px solid blue;
+        width: 100%;
 
         .menu-item {
+          width: 100%;
+          cursor: pointer;
+          margin-top: 10px;
+          padding: 10px;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
           &.is-selected {
             background: lightblue;
+          }
+
+          .checkbox {
+            cursor: pointer;
           }
         }
       }

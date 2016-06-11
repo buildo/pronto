@@ -20,16 +20,22 @@ export default class MenuItem extends React.Component {
 
     return {
       ...this.props,
+      selected,
       className: cx('menu-item', { 'is-selected': selected })
     };
   }
 
-  template({ name, description, className, onClick }) {
+  template({ name, description, price, className, onClick, selected }) {
     return (
-      <FlexView className={className}>
-        <h4>{name}</h4>
-        <div>{description}</div>
-        {onClick && <FlexView marginLeft='auto' onClick={onClick}>AZIONE</FlexView>}
+      <FlexView {...{ className, onClick }}>
+        <FlexView grow column>
+          <div className='name'>{name}</div>
+          <div className='description'>{description}</div>
+        </FlexView>
+        <FlexView marginLeft='auto' shrink={false}>
+          {price && <div className='price'>{price}</div>}
+          {onClick && <input className='checkbox' readOnly checked={selected} type='checkbox' />}
+        </FlexView>
       </FlexView>
     );
   }

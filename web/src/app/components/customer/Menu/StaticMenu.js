@@ -15,7 +15,7 @@ export default class StaticMenu extends React.Component {
 
   template({ menu }) {
     return (
-      <FlexView className='static-menu' column>
+      <FlexView className='static-menu' column shrink={false}>
         <h2>{menu.description}</h2>
         <FlexView className='menu-groups' hAlignContent='center' column>
           {menu.groups.map((menuGroup, i) => <MenuGroup {...menuGroup} key={i} />)}

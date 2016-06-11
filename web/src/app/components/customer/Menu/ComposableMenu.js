@@ -44,7 +44,7 @@ export default class ComposableMenu extends React.Component {
 
   template({ description, groups, personItems, toggleMenuItem }) {
     return (
-      <FlexView className='composable-menu' column>
+      <FlexView className='composable-menu' column shrink={false}>
         <h2>{description}</h2>
         <FlexView className='menu-groups' hAlignContent='center' column>
           {this.templateGroups({ groups, personItems, toggleMenuItem })}
