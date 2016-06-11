@@ -1,0 +1,82 @@
+@import '~theme/variables.scss';
+
+.static-menu, .composable-menu {
+  width: 588px;
+  border-radius: 4px;
+  text-align: left;
+	background-color: $lightgray;
+  padding: 16px;
+
+  .menu-title {
+    color: $orange;
+    font-size: 16px;
+  	letter-spacing: 1.6px;
+    margin-bottom: 14.5px;
+  }
+
+  .menu-description {
+    font-size: 14px;
+  	line-height: 1.4;
+  	color: #151516;
+    padding: 11px 0;
+    border-top: 1px solid #DDDEDF;
+    margin-bottom: 28px;
+  }
+
+  .menu-groups {
+    width: 100%;
+
+    .menu-group {
+      width: 100%;
+      margin-bottom: 43.5px;
+
+      &:last-child {
+        margin-bottom: 33px;
+      }
+
+      .group-name {
+      	font-size: 14px;
+        color: #BFC0C0;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      .menu-items {
+        width: 100%;
+
+        .menu-item {
+          width: 100%;
+          cursor: pointer;
+          margin-top: 10px;
+          padding: 11.5px 0;
+          border-top: 1px solid #DDDEDF;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid #DDDEDF;
+          }
+
+          .item-name {
+            font-size: 16px;
+          	color: #151516;
+          }
+
+          .item-description {
+            margin-top: 5px;
+            font-size: 14px;
+          	line-height: 1.4;
+            color: #9FA0A2;
+            font-weight: 200;
+          }
+
+          .checkbox {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

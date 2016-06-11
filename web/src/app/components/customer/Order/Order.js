@@ -16,14 +16,14 @@ import { Order as OrderType } from 'model';
 export default class Order extends React.Component {
 
   onAddPersonClick = () => {
-    const personName = window.prompt('Inserisci il nome della persona');
-    personName.trim() && this.props.onAddPersonClick(personName.trim());
+    const personId = window.prompt('Inserisci il nome della persona');
+    personId.trim() && this.props.onAddPersonClick(personId.trim());
   }
 
-  onDeletePersonClick = (personName) => (e) => {
+  onDeletePersonClick = (personId) => (e) => {
     e.stopPropagation();
-    if (window.confirm(`Eliminare l\'ordine di ${personName}?`)) {
-      this.props.onDeletePersonClick(personName);
+    if (window.confirm(`Eliminare l\'ordine di ${personId}?`)) {
+      this.props.onDeletePersonClick(personId);
     }
   }
 
