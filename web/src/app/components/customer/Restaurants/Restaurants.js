@@ -4,6 +4,7 @@ import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
 import { Restaurant } from 'model';
+import RestaurantCard from '../RestaurantCard/RestaurantCard';
 
 @skinnable()
 @props({
@@ -12,16 +13,12 @@ import { Restaurant } from 'model';
 })
 export default class Restaurants extends React.Component {
 
-  templateRestaurant = (onRestaurantClick) => (restaurant, key) => (
-    <FlexView key={key} onClick={onRestaurantClick(restaurant._id)}>
-      {restaurant.profile.name}
-    </FlexView>
-  )
-
   template({ restaurants, onRestaurantClick }) {
     return (
       <FlexView>
-        {restaurants.map(this.templateRestaurant(onRestaurantClick))}
+        {restaurants.map((r, i) => (
+          <RestaurantCard profile={r.profile} onClick={onRestaurantClick(r._id)} key={i} />
+        ))}
       </FlexView>
     );
   }
