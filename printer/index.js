@@ -23,7 +23,7 @@ const config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
-const orders = database.ref('order');
+const orders = database.ref(`orders/${restaurantId}`);
 const led = database.ref('led');
 
 // ------------------------------------------------------------------
@@ -75,5 +75,3 @@ function updateLedStatus(status) {
   const s = status ? 'ON' : 'OFF';
   console.log(`The led is now ${s}`);
 }
-
-setInterval(toggleLed, 5000);
