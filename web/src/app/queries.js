@@ -84,6 +84,16 @@ export const order = Query({
   fetch: () => Promise.resolve(Order({
     id: 'deredede',
     status: 'pending',
-    people: []
+    people: [{
+      name: 'aski',
+      items: [
+        'Simcoe'
+      ]
+    }, {
+      name: 'Gio',
+      items: [
+        'Spaghetti alla Carbonara'
+      ]
+    }]
   }))
 });
