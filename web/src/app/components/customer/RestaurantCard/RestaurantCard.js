@@ -23,7 +23,7 @@ export default class RestaurantCard extends React.Component {
     return { name, address, imageURL, onClick };
   }
 
-  template({ name, imageURL, address, onClick, timeStart, timeEnd }) {
+  template({ name, imageURL, address, onClick }) {
     return (
       <div className='restaurant-card' onClick={onClick}>
         <img src={imageURL} alt={name} />
