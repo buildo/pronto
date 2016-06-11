@@ -97,3 +97,9 @@ export const order = Query({
     }]
   }))
 });
+
+export const open = Query({
+  id: 'open',
+  returnType: t.Boolean,
+  fetch: () => Promise.resolve(JSON.parse(localStorage.getItem('open')))
+});

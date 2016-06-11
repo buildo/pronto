@@ -1,5 +1,5 @@
 import { Command } from 'avenger';
-import { user } from 'queries';
+import { user, open } from 'queries';
 
 export const doRefreshUser = Command({
   id: 'doRefreshUser',
@@ -31,4 +31,22 @@ export const doDeletePersonFromOrder = Command({
 export const doAddPersonToOrder = Command({
   id: 'doAddPersonToOrder',
   run: () => Promise.resolve()
+});
+
+export const doOpen = Command({
+  id: 'doOpen',
+  invalidates: { open },
+  run: () => {
+    localStorage.setItem('open', true);
+    return Promise.resolve();
+  }
+});
+
+export const doClose = Command({
+  id: 'doClose',
+  invalidates: { open },
+  run: () => {
+    localStorage.setItem('open', false);
+    return Promise.resolve();
+  }
 });
