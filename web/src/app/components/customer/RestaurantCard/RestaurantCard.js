@@ -1,7 +1,6 @@
 import React from 'react';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
-import { FlexView } from 'Basic';
 import { RestaurantProfile } from 'model';
 
 import './restaurantCard.scss';

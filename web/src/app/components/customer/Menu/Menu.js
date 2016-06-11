@@ -17,9 +17,7 @@ import './menu.scss';
 })
 export default class Menu extends React.Component {
 
-  getLocals() {
-    const { isStatic, menu, ...props } = this.props;
-
+  getLocals({ isStatic, menu, ...props }) {
     return {
       isStatic,
       staticMenuProps: isStatic && {
