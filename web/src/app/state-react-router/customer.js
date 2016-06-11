@@ -6,7 +6,7 @@ const routerStateKey = 'view';
 const routerStatePathParamKeys = ['restaurantId', 'orderId', 'personName', 'personId'];
 
 // insert here any parameter that you don't want to serialize in the URL
-const ignoreParams = [ routerStateKey, 'token' ];
+const ignoreParams = [ routerStateKey, 'token', 'personItems' ];
 
 export const {
   makeOnBrowserChange,
