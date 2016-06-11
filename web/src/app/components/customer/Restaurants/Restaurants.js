@@ -18,7 +18,7 @@ export default class Restaurants extends React.Component {
       <FlexView>
         {restaurants.map((r, i) => (
           <RestaurantCard profile={r.profile} onClick={onRestaurantClick(r._id)} key={i} />
-        )}
+        ))}
       </FlexView>
     );
   }
