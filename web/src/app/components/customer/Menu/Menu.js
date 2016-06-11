@@ -17,16 +17,11 @@ import './menu.scss';
 })
 export default class Menu extends React.Component {
 
-  getLocals({ isStatic, menu, ...props }) {
+  getLocals({ isStatic, menu, ...otherProps }) {
     return {
       isStatic,
-      staticMenuProps: isStatic && {
-        menu
-      },
-      composableMenuProps: !isStatic && {
-        menu,
-        ...props
-      }
+      staticMenuProps: isStatic && { menu },
+      composableMenuProps: !isStatic && { menu, ...otherProps }
     };
   }
 
