@@ -1,7 +1,7 @@
 import { Query } from 'avenger';
 import t from 'tcomb';
 import * as API from 'API';
-import { Menu, Restaurant, SubmittedOrder } from 'model';
+import { Menu, Order, Restaurant, SubmittedOrder } from 'model';
 
 const restaurantFixture = Restaurant({
   _id: 'dmiojdeinuinfuiw',
@@ -76,4 +76,14 @@ export const orders = Query({
       name: 'gio', items: []
     }]
   }].map(SubmittedOrder))
+});
+
+export const order = Query({
+  id: 'order',
+  returnType: Order,
+  fetch: () => Promise.resolve(Order({
+    id: 'deredede',
+    status: 'pending',
+    people: []
+  }))
 });
