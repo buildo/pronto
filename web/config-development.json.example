@@ -1,0 +1,10 @@
+{
+  "NODE_ENV": "development",
+  "hostname": "localhost",
+  "port": 9090,
+  "apiEndpoint": "http://localhost:8080",
+  "eslint": true,
+  "devTool": "source-map",
+  "title": "Yet another revenge app",
+  "debug": "app*,state*,react-avenger*"
+}

@@ -1,0 +1,63 @@
+@import './variables.scss';
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h2 {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h3 {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+strong {
+  font-weight: 700;
+}
+
+a {
+  cursor: pointer;
+  color: $aquamarine;
+}
+
+a:hover {
+  color: $aquamarine;
+}
+
+input {
+  height: 36px;
+  border-radius: 1px;
+  border: 1px solid $paleGrey;
+  font-weight: $semibold;
+  font-size: 14px;
+  color: $charcoal;
+  box-sizing: border-box;
+
+  &::-webkit-input-placeholder {
+    color: $grayChateau;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $grayChateau;
+  }
+  &::-moz-placeholder {  /* Firefox 19*/
+    color: $grayChateau;
+  }
+  &:-ms-input-placeholder {
+    color: $grayChateau;
+  }
+}

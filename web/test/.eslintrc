@@ -1,0 +1,6 @@
+{
+  "extends": "buildo",
+  "env": {
+    "mocha": true
+  }
+}
