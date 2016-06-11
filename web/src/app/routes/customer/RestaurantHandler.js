@@ -1,10 +1,8 @@
 import React from 'react';
+import { RouteHandler } from 'react-router';
 import Restaurant from 'customer/Restaurant';
 import { FlexView as View } from 'Basic';
 import RightSidebar from 'customer/RightSidebar';
-
-// temp
-const Cart = <div className='cart' />;
 
 export default class RestaurantHandler extends React.Component {
   render() {
@@ -12,7 +10,7 @@ export default class RestaurantHandler extends React.Component {
       <View>
         <Restaurant />
         <RightSidebar>
-          <Cart />
+          <RouteHandler />
         </RightSidebar>
       </View>
     );
