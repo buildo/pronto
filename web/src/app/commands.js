@@ -22,3 +22,13 @@ export const doLogout = Command({
     return Promise.resolve();
   }
 });
+
+export const doDeletePersonFromOrder = Command({
+  id: 'doDeletePersonFromOrder',
+  run: () => Promise.resolve()
+});
+
+export const doAddPersonToOrder = Command({
+  id: 'doAddPersonToOrder',
+  run: () => Promise.resolve()
+});

@@ -12,7 +12,7 @@ export default (
     <Route name='restaurants'>
       <Route name='restaurant' path='/restaurants/:restaurantId/?' handler={Restaurant}>
         <Route name='order' path=':orderId/?' handler={Order} />
-        <Route name='personOrder' path=':orderId/:personId/?' handler={PersonOrder} />
+        <Route name='personOrder' path=':orderId/:personName/?' handler={PersonOrder} />
         <DefaultRoute handler={CreateOrder} />
       </Route>
       <DefaultRoute  handler={Restaurants} />
