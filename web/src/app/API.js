@@ -2,9 +2,31 @@ const map = v => Object.keys(v).map(_id => ({ ...v[_id], _id }));
 
 const baseUrl = 'https://pronto-9842a.firebaseio.com/';
 
-const ProntoAPI = {
+const PAPI = {
   get: (resource) => {
     return fetch(`${baseUrl}${resource}.json`).then(res => res.json());
+  },
+
+  put: (resource, body) => {
+    return fetch(`${baseUrl}${resource}.json`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+  },
+
+  patch: (resource, body) => {
+    return fetch(`${baseUrl}${resource}.json`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
   }
 };
 
@@ -15,13 +37,42 @@ export const getUser = () => {
 };
 
 export const getRestaurants = () => {
-  return ProntoAPI.get('restaurants').then(map).then(restaurants => restaurants.map(r => ({
+  return PAPI.get('restaurants').then(map).then(restaurants => restaurants.map(r => ({
     ...r, menu: { ...r.menu, groups: map(r.menu.groups) }
   })));
 };
 
 export const getRestaurant = (rid) => {
-  return ProntoAPI.get(`restaurants/${rid}`).then(r => ({
+  return PAPI.get(`restaurants/${rid}`).then(r => ({
     ...r, _id: rid, menu: { ...r.menu, groups: map(r.menu.groups) }
   }));
+};
+
+export const putRestaurant = (rid, body) => {
+  return PAPI.put(`restaurants/${rid}`, body);
+};
+
+export const getMenu = (rid) => {
+  return PAPI.get(`restaurant/${rid}/menu`);
+};
+
+//TODO add orderBy
+export const getOrders = (rid) => {
+  return PAPI.get(`orders/${rid}`);
+};
+
+export const putOrder = (rid, oid, body) => {
+  return PAPI.put(`orders/${rid}/${oid}`, body);
+};
+
+export const getRestaurantOrder = (rid, oid) => {
+  return PAPI.get(`orders/${rid}/${oid}`);
+};
+
+export const putRestaurantOrderPerson = (rid, oid, uid, body) => {
+  return PAPI.put(`orders/${rid}/${oid}/peopleOrders/{uid}`, body);
+};
+
+export const patchOrder = (rid, oid, body) => {
+  return PAPI.patch(`orders/${rid}/${oid}`, body);
 };
