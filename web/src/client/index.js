@@ -1,7 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import t from 'tcomb';
 import config from '../../config';
-import Router from 'react-router-transition-context';
+import Router from 'react-router';
 import debug from 'debug';
 import mkAvenger from 'avenger';
 import { QueriesContextTypes } from 'react-avenger/queries';
@@ -68,7 +69,7 @@ export default function client({
         Handler => () => <Handler /> // eslint-disable-line react/display-name
       ),
       render: (element: t.ReactElement) => {
-        React.render(element, mountNode);
+        ReactDOM.render(element, mountNode);
       },
       subscribe: s => {
         log('state', s);
