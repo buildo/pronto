@@ -6,8 +6,6 @@ import { Menu } from 'model';
 import FlexView from 'FlexView';
 import MenuGroup from './MenuGroup';
 
-import '../Menu/menu.scss';
-
 @pure
 @skinnable()
 @props({

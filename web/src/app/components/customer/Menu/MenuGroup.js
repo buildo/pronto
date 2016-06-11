@@ -11,8 +11,8 @@ import MenuItem from './MenuItem';
 @props({
   name: t.String,
   items: t.list(MenuItemModel),
-  personItems: t.list(t.String),
-  onChange: t.Function
+  personItems: t.maybe(t.list(t.String)),
+  onChange: t.maybe(t.Function)
 })
 export default class MenuGroup extends React.Component {
 
@@ -30,7 +30,7 @@ export default class MenuGroup extends React.Component {
   templateMenuItems = ({ menuItems, toggleMenuItem, personItems }) => menuItems.map(menuItem => (
     <MenuItem
       {...menuItem}
-      onClick={() => toggleMenuItem(menuItem.name)}
+      onClick={toggleMenuItem ? () => toggleMenuItem(menuItem.name) : undefined}
       selected={includes(personItems, menuItem.name)}
       key={menuItem.name}
     />

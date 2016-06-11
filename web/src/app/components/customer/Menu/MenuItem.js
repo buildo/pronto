@@ -10,8 +10,8 @@ import FlexView from 'FlexView';
   name: t.String,
   price: t.maybe(t.Number),
   description: t.maybe(t.String),
-  selected: t.Boolean,
-  onClick: t.Function
+  selected: t.maybe(t.Boolean),
+  onClick: t.maybe(t.Function)
 })
 export default class MenuItem extends React.Component {
 
@@ -26,10 +26,10 @@ export default class MenuItem extends React.Component {
 
   template({ name, description, className, onClick }) {
     return (
-      <FlexView {...{ className, onClick }}>
+      <FlexView className={className}>
         <h4>{name}</h4>
         <div>{description}</div>
-        <FlexView marginLeft='auto'>AZIONE</FlexView>
+        {onClick && <FlexView marginLeft='auto' onClick={onClick}>AZIONE</FlexView>}
       </FlexView>
     );
   }

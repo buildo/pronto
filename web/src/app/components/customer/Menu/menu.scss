@@ -11,6 +11,12 @@
       .menu-items {
         padding: 10px;
         border: 1px solid blue;
+
+        .menu-item {
+          &.is-selected {
+            background: lightblue;
+          }
+        }
       }
     }
   }
