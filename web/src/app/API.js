@@ -17,3 +17,7 @@ export const getUser = () => {
 export const getRestaurants = () => {
   return ProntoAPI.get('restaurants').then(map);
 };
+
+export const getRestaurant = (rid) => {
+  return ProntoAPI.get(`restaurants/${rid}`);
+};

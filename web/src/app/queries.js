@@ -17,8 +17,9 @@ export const restaurants = Query({
 
 export const restaurant = Query({
   id: 'restaurant',
+  params: { restaurantId: t.String },
   returnType: Restaurant,
-  fetch: (/* { restaurantId }*/) => Promise.resolve('ahah')
+  fetch: ({ restaurantId }) => API.getRestaurant(restaurantId)
 });
 
 export const menu = Query({
