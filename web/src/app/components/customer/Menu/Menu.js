@@ -13,19 +13,25 @@ import './menu.scss';
   value: t.list(t.String), // Person.items
   onChange: t.Function,
   menu: MenuModel,
-  isStatic: t.Boolean
+  isStatic: t.Boolean,
+  hide: t.Boolean
 })
 export default class Menu extends React.Component {
 
-  getLocals({ isStatic, menu, ...otherProps }) {
+  getLocals({ isStatic, menu, hide, ...otherProps }) {
     return {
       isStatic,
       staticMenuProps: isStatic && { menu },
-      composableMenuProps: !isStatic && { menu, ...otherProps }
+      composableMenuProps: !isStatic && { menu, ...otherProps },
+      hide
     };
   }
 
-  template({ isStatic, staticMenuProps, composableMenuProps }) {
+  template({ isStatic, staticMenuProps, composableMenuProps, hide }) {
+    if (hide) {
+      return null;
+    }
+
     return (
       isStatic ?
         <StaticMenu {...staticMenuProps} /> :

@@ -11,6 +11,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import InputChildren from 'react-input-children';
 
 import './order.scss';
+import { orange } from 'theme/variables.scss';
 
 @skinnable()
 @props({
@@ -20,7 +21,8 @@ import './order.scss';
   onDeletePersonClick: t.Function,
   onConfirmOrder: t.Function,
   maxPeopleNumber: t.Integer,
-  refresh: t.Function
+  refresh: t.Function,
+  orderSubmitted: t.Boolean
 })
 export default class Order extends React.Component {
 
@@ -79,7 +81,7 @@ export default class Order extends React.Component {
 
   getLocals({
     order: { peopleOrders: people }, onPersonClick,
-    onDeletePersonClick, maxPeopleNumber, refresh
+    onDeletePersonClick, maxPeopleNumber, refresh, orderSubmitted
   }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
@@ -128,9 +130,11 @@ export default class Order extends React.Component {
       orderDetailsProps: {
         people,
         onEditPerson: onPersonClick,
-        onDeletePerson: onDeletePersonClick
+        onDeletePerson: onDeletePersonClick,
+        orderSubmitted
       },
-      refresh
+      refresh,
+      orderSubmitted
     };
   }
 
@@ -141,29 +145,37 @@ export default class Order extends React.Component {
     showConfirmModal, showNameModal,
     modalConfirmProps: { tableInputProps, telephoneInputProps, ...modalConfirmProps },
     modalNameProps: { nameInputProps, ...modalNameProps },
-    refresh
+    refresh, orderSubmitted
   }) {
     return (
       <FlexView className='order' grow column>
-        <Poll interval={3000} callback={refresh} />
+        {!orderSubmitted && <Poll interval={3000} callback={refresh} />}
         <OrderDetails {...orderDetailsProps} />
-        <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
-          Aggiungi persona
-        </button>
-        <button className='primary' onClick={openConfirmModal}>
-          Invia ordine
-        </button>
-        <p>
-          Invia il link a tutti quelli che vuoi invitare
-        </p>
-        <CopyToClipboard {...clipboardProps}>
-          <InputChildren value={clipboardProps.text} readOnly wrapper={{ className: 'copy-input' }}>
-            <a style={{ margin: '0 5px', pointerEvents: 'none' }}>
-              {clipboardProps.inputValue}
-            </a>
-          </InputChildren>
-        </CopyToClipboard>
-        {showConfirmModal && (
+        {!orderSubmitted &&
+          <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
+            Aggiungi persona
+          </button>
+        }
+        {!orderSubmitted &&
+          <button className='primary' onClick={openConfirmModal}>
+            Invia ordine
+          </button>
+        }
+        {!orderSubmitted && <p>Invia il link a tutti quelli che vuoi invitare</p>}
+        {!orderSubmitted && (
+          <CopyToClipboard {...clipboardProps}>
+            <InputChildren
+              value={clipboardProps.text}
+              readOnly
+              wrapper={{ className: 'copy-input' }}
+            >
+              <a style={{ margin: '0 5px', pointerEvents: 'none' }}>
+                {clipboardProps.inputValue}
+              </a>
+            </InputChildren>
+          </CopyToClipboard>
+        )}
+        {!orderSubmitted && showConfirmModal && (
           <Modal {...modalConfirmProps}>
             <FlexView column>
               <h1>
@@ -180,7 +192,7 @@ export default class Order extends React.Component {
             </FlexView>
           </Modal>
         )}
-        {showNameModal && (
+        {!orderSubmitted && showNameModal && (
           <Modal {...modalNameProps}>
             <FlexView column>
               <p>Nome</p>
@@ -190,6 +202,12 @@ export default class Order extends React.Component {
               </button>
             </FlexView>
           </Modal>
+        )}
+        {orderSubmitted && (
+          <FlexView column>
+            <h1 style={{ color: orange }}>Ordine inviato!</h1>
+            <p>Presentati al ristorante quando vuoi</p>
+          </FlexView>
         )}
       </FlexView>
     );

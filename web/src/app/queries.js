@@ -13,7 +13,8 @@ export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
   fetch: () => API.getRestaurants()
-    .then(restaurants => restaurants.filter(r => r && Restaurant.is(r)))
+    // TODO(gio): not sure about this, Restaurant.is should be enough?
+    .then(restaurants => restaurants.filter(r => r && r.menu && r.open && Restaurant.is(r)))
 });
 
 export const restaurant = Query({
@@ -79,4 +80,16 @@ export const open = Query({
   params: { restaurantId: t.String },
   returnType: t.Boolean,
   fetch: ({ restaurantId }) => API.isRestaurantOpen(restaurantId)
+});
+
+export const maybeOrder = Query({
+  id: 'order',
+  returnType: t.maybe(Order),
+  params: { restaurantId: t.String, orderId: t.maybe(t.String) },
+  fetch: ({ restaurantId, orderId }) => {
+    return orderId ? API.getRestaurantOrder(restaurantId, orderId).then(order => ({
+      ...order,
+      peopleOrders: (order.peopleOrders || []).filter(x => x)
+    })) : Promise.resolve(null);
+  }
 });

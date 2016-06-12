@@ -106,6 +106,7 @@ export const doConfirmOrder = Command({
     customerPhoneNumber: t.String,
     tableName: t.String
   },
+  invalidates: { order },
   run: ({ restaurantId: rId, orderId: oId, customerPhoneNumber, tableName }) => (
     API.patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
   )

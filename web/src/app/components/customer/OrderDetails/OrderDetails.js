@@ -12,7 +12,8 @@ import './group-5@2x.png';
 @props({
   people: t.list(Person),
   onDeletePerson: t.maybe(t.Function),
-  onEditPerson: t.maybe(t.Function)
+  onEditPerson: t.maybe(t.Function),
+  orderSubmitted: t.maybe(t.Boolean)
 })
 export default class OrderDetails extends React.Component {
 
@@ -37,7 +38,7 @@ export default class OrderDetails extends React.Component {
     this.setState({ ...this.initialState });
   }
 
-  getLocals({ people, onEditPerson, onDeletePerson }) {
+  getLocals({ people, onEditPerson, onDeletePerson, orderSubmitted }) {
     const { showConfirmModal, personNameToDelete } = this.state;
 
     return {
@@ -49,18 +50,23 @@ export default class OrderDetails extends React.Component {
       modalProps: showConfirmModal && {
         onDismiss: this.closeConfirmModal,
         title: `Eliminare l'ordine di "${personNameToDelete}"?`
-      }
+      },
+      showControls: !orderSubmitted
     };
   }
 
-  templatePerson = ({ name, onEditPerson, onDeletePerson, items }) => (
+  templatePerson = ({ name, onEditPerson, onDeletePerson, items, showControls }) => (
     <FlexView column className='order-person' key={name}>
       <FlexView className='order-header' vAlignContent='center'>
         <div className='mini-logo' />
         {name}
         <FlexView marginLeft='auto' vAlignContent='center'>
-          {onEditPerson && <i className='fa fa-pencil' onClick={() => onEditPerson(name)} />}
-          {onDeletePerson && <i className='fa fa-close' onClick={() => onDeletePerson(name)} />}
+          {showControls && onEditPerson &&
+            <i className='fa fa-pencil' onClick={() => onEditPerson(name)} />
+          }
+          {showControls && onDeletePerson &&
+            <i className='fa fa-close' onClick={() => onDeletePerson(name)} />
+          }
         </FlexView>
       </FlexView>
       <FlexView column className='order-content'>

@@ -1,6 +1,7 @@
 import container from 'container';
 import Order from './Order';
 import loadingDecorator from 'noLoading';
+import { OrderStatus } from 'model';
 
 export default container(Order, {
   connect: { },
@@ -17,6 +18,7 @@ export default container(Order, {
     onDeletePersonClick: personId => doDeletePersonFromOrder({ personId }),
     onConfirmOrder: doConfirmOrder,
     maxPeopleNumber: restaurant.maxPeopleNumber,
-    refresh
+    refresh,
+    orderSubmitted: order.status === OrderStatus('submitted')
   })
 });

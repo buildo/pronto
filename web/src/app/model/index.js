@@ -26,7 +26,7 @@ export const OrderStatus = t.enums.of(['submitted', 'pending'], 'OrderStatus');
 
 export const Order = t.refinement(t.interface({
   id: t.String, // client session id
-  createdAt: t.maybe(t.Number), // TODO(gio): add a s required in submitted order
+  createdAt: t.maybe(t.Number), // TODO(gio): add as required in submitted order
   customerPhoneNumber: t.maybe(t.String),
   tableName: t.maybe(t.String),
   status: OrderStatus,
@@ -39,7 +39,7 @@ export const SubmittedOrder = t.refinement(Order, order => {
   return order.status === OrderStatus('submitted');
 }, 'SubmittedOrder');
 
-export const Restaurant = t.interface({
+export const Restaurant = t.refinement(t.interface({
   menu: Menu,
   name: t.String,
   description: t.maybe(t.String),
@@ -49,7 +49,7 @@ export const Restaurant = t.interface({
   open: t.Boolean, // on/off
   maxPeopleNumber: t.Integer,
   imgUrl: t.String
-}, { name: 'Restaurant', strict: true });
+}, { strict: true }), r => r.open, 'Restaurant');
 
 export const PendingRestaurant = t.refinement(t.interface({
   open: t.Boolean
