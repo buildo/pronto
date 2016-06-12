@@ -76,7 +76,7 @@ export default class Order extends React.Component {
   }
 
   componentWillUnmount() {
-    this.clearTimeout(this.timeout);
+    clearTimeout(this.timeout);
   }
 
   getLocals({

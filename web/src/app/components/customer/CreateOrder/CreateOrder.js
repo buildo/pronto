@@ -19,7 +19,7 @@ export default class CreateOrder extends React.Component {
           Dopo che avrai effettuato l’ordine <b>entro 15 minuti</b> il tavolo sarà pronto!
         </p>
         <button className='primary' onClick={onCreateOrderClick}>
-          Create order
+          Crea il tuo ordine
         </button>
       </FlexView>
     );
