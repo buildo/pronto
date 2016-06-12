@@ -14,6 +14,7 @@ export default container(Menu, {
     menu: pendingMenu || menu || EMPTY,
     saveEnabled: !t.Nil.is(pendingMenu) && !isEqual(pendingMenu, menu),
     onChange: pendingMenu => transition({ pendingMenu }),
-    onSubmit: () => doUpdateMenu({ menu: pendingMenu })
+    onSubmit: () => doUpdateMenu({ menu: pendingMenu }),
+    onDiscard: () => transition({ pendingMenu: null })
   })
 });

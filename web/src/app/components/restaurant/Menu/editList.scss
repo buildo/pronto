@@ -6,6 +6,10 @@
   border-bottom-width: 3px;
   font-size: 16px;
 
+  .edit-list:hover {
+    background: rgba(210, 210, 210, 0.3);
+  }
+
   .edit-list, .edit-list input {
     font-size: 13px;
   }
