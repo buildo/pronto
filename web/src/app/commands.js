@@ -36,17 +36,30 @@ export const doAddPersonToOrder = Command({
 export const doOpen = Command({
   id: 'doOpen',
   invalidates: { open },
-  run: () => {
-    localStorage.setItem('open', true);
-    return Promise.resolve();
-  }
+  run: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ open: true })
+  })
 });
 
 export const doClose = Command({
   id: 'doClose',
   invalidates: { open },
-  run: () => {
-    localStorage.setItem('open', false);
-    return Promise.resolve();
-  }
+  run: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ open: false })
+  })
 });
+
+export const doRefreshOpen = Command({
+  id: 'doRefreshOpen',
+  invalidates: { open },
+  run: ::Promise.resolve
+});
+
