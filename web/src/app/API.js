@@ -86,10 +86,10 @@ export const patchOrder = (rid, oid, body) => {
   return PAPI.patch(`orders/${rid}/${oid}`, body);
 };
 
-export const replacePeopleOrdersInRestaurantOrder = (rid, oid, peopleOrders) => {
-  return PAPI.put(`orders/${rid}/${oid}/peopleOrders`, peopleOrders);
+export const deletePersonOrderInRestaurantOrder = (rid, oid, uid) => {
+  return PAPI.delete(`orders/${rid}/${oid}/peopleOrders/${uid}`);
 };
 
 export const putPerson = (rid, oid, body) => {
-  return PAPI.put(`orders/${rid}/${oid}/peopleOrders`, body);
+  return PAPI.patch(`orders/${rid}/${oid}/peopleOrders`, body);
 };

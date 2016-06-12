@@ -2,8 +2,7 @@ import { Command } from 'avenger';
 import t from 'tcomb';
 import { user, open, restaurantProfile, menu, order } from 'queries';
 import * as API from 'API';
-import { Menu, Order } from 'model';
-import findIndex from 'lodash/findIndex';
+import { Menu } from 'model';
 
 export const doRefreshUser = Command({
   id: 'doRefreshUser',
@@ -32,19 +31,14 @@ export const doDeletePersonFromOrder = Command({
   params: {
     restaurantId: t.String,
     orderId: t.String,
-    order: Order,
     personId: t.String
   },
   invalidates: { order },
-  run: ({ restaurantId, orderId, order, personId }) => {
-    const personIndex = findIndex(order.peopleOrders, { name: personId });
-    const peopleOrders = order.peopleOrders || [];
-    return API.replacePeopleOrdersInRestaurantOrder(
-      restaurantId,
-      orderId,
-      peopleOrders.slice(0, personIndex).concat(peopleOrders.slice(personIndex + 1))
-    );
-  }
+  run: ({ restaurantId, orderId, personId }) => API.deletePersonOrderInRestaurantOrder(
+    restaurantId,
+    orderId,
+    personId
+  )
 });
 
 export const doAddPersonToOrder = Command({
@@ -53,16 +47,14 @@ export const doAddPersonToOrder = Command({
     restaurantId: t.String,
     orderId: t.String,
     personId: t.String,
-    personItems: t.list(t.String),
-    order: Order
+    personItems: t.list(t.String)
   },
   invalidates: { order },
   run: ({
-    restaurantId, orderId, personId: name,
-    personItems: items, order: { peopleOrders = [] }
+    restaurantId, orderId, personId: name, personItems: items
   }) => {
     if (items.length > 0) {
-      return API.putPerson(restaurantId, orderId, peopleOrders.concat({ name, items }));
+      return API.putPerson(restaurantId, orderId, { [name]: { items } });
     } else {
       return Promise.resolve();
     }
