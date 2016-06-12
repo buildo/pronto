@@ -5,6 +5,7 @@ import { Menu as MenuT, MenuGroup } from 'model';
 import { View, Button } from 'Basic';
 import editList from './editList';
 import Group from './Group';
+import './menu.scss';
 
 // TODO(gio): mabe ask for confirmation when submitting
 // import Modal from 'Modal';
@@ -20,11 +21,39 @@ import Group from './Group';
 //   </Modal>
 // )}
 
-import './menu.scss';
+const inputStyle = { marginTop: 5, marginBottom: 5, padding: 5 };
+
+@pure
+@skinnable()
+@props({
+  saveEnabled: t.Boolean,
+  onSubmit: t.Function,
+  onDiscard: t.Function
+})
+class Actions extends React.Component {
+  template({ saveEnabled, onDiscard, onSubmit }) {
+    return (
+      <View grow style={inputStyle} hAlignContent='right' className='actions'>
+        {saveEnabled && (
+          <Button
+            label='Discard changes'
+            baseState='ready'
+            onClick={onDiscard}
+            style={{ width: 200 }}
+          />
+        )}
+        <Button
+          label={saveEnabled ? 'Save' : 'Saved.'}
+          baseState={saveEnabled ? 'ready' : 'not-allowed'}
+          onClick={onSubmit}
+          style={{ width: 200 }}
+        />
+      </View>
+    );
+  }
+}
 
 const EditList = editList(MenuGroup);
-
-const inputStyle = { marginTop: 5, marginBottom: 5, padding: 5 };
 
 const emptyGroup = { description: '', items: [] };
 
@@ -32,27 +61,31 @@ const emptyGroup = { description: '', items: [] };
 @skinnable()
 @props({
   menu: MenuT,
-  saveEnabled: t.Boolean,
   onChange: t.Function,
-  onSubmit: t.Function
+  saveEnabled: t.Boolean,
+  onSubmit: t.Function,
+  onDiscard: t.Function
 })
-export default class Menu extends React.Component {
+export default class Menu extends React.Component { // eslint-disable-line react/no-multi-comp
 
-  getLocals({ menu, onChange, saveEnabled, onSubmit }) {
+  getLocals({ menu, onChange, saveEnabled, onSubmit, onDiscard }) {
     return {
       menu,
-      saveEnabled,
-      onSubmit,
       onChange: key => evt => onChange({ ...menu, [key]: evt.target.value }),
-      onGroupsChange: groups => onChange({ ...menu, groups })
+      onGroupsChange: groups => onChange({ ...menu, groups }),
+      actionsProps: {
+        onDiscard, saveEnabled, onSubmit
+      }
     };
   }
 
   template({
-    menu: { description, groups = [] }, onChange, saveEnabled, onSubmit, onGroupsChange
+    menu: { description, groups = [] },
+    onChange, onGroupsChange, actionsProps
   }) {
     return (
       <View column grow className='menu'>
+        <Actions {...actionsProps} />
         <View grow style={inputStyle}>
           <textarea
             rows={4}
@@ -70,14 +103,7 @@ export default class Menu extends React.Component {
           listTitle='Menu Groups'
           itemLabel='Menu Group'
         />
-        <View grow style={inputStyle} hAlignContent='right'>
-          <Button
-            label={saveEnabled ? 'Save' : 'Saved.'}
-            baseState={saveEnabled ? 'ready' : 'not-allowed'}
-            onClick={onSubmit}
-            style={{ width: 200 }}
-          />
-        </View>
+        <Actions {...actionsProps} />
       </View>
     );
   }
