@@ -1,5 +1,6 @@
 import React from 'react';
 import t from 'tcomb';
+import cx from 'classnames';
 import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
@@ -15,7 +16,8 @@ import './order.scss';
   onAddPersonClick: t.Function,
   onPersonClick: t.Function,
   onDeletePersonClick: t.Function,
-  onConfirmOrder: t.Function
+  onConfirmOrder: t.Function,
+  maxPeopleNumber: t.Integer
 })
 export default class Order extends React.Component {
 
@@ -62,7 +64,10 @@ export default class Order extends React.Component {
 
   closeNameModal = () => this.setState({ ...this.initialState, showNameModal: false })
 
-  getLocals({ order: { peopleOrders: people }, onPersonClick, onDeletePersonClick }) {
+  getLocals({
+    order: { peopleOrders: people }, onPersonClick,
+    onDeletePersonClick, maxPeopleNumber
+  }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name
@@ -72,10 +77,10 @@ export default class Order extends React.Component {
       onPersonClick,
       showConfirmModal,
       showNameModal,
-      onAddPersonClick: this.onAddPersonClick,
+      onAddPersonClick: people.length < maxPeopleNumber ? this.onAddPersonClick : undefined,
       onConfirmOrder: this.onConfirmOrder,
       openConfirmModal: this.openConfirmModal,
-      openNameModal: this.openNameModal,
+      openNameModal: people.length < maxPeopleNumber ? this.openNameModal : undefined,
       modalConfirmProps: {
         className: 'confirm-order-modal',
         onDismiss: this.closeConfirmModal,
@@ -121,7 +126,7 @@ export default class Order extends React.Component {
     return (
       <FlexView className='order' grow column>
         <OrderDetails {...orderDetailsProps} />
-        <button onClick={openNameModal}>
+        <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
           Aggiungi persona
         </button>
         <button className='primary' onClick={openConfirmModal}>
