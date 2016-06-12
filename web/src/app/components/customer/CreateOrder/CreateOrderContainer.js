@@ -1,11 +1,16 @@
 import container from 'container';
-import uniqueId from 'lodash/uniqueId';
+import uuid from 'node-uuid';
 import CreateOrder from './CreateOrder';
 
 
 export default container(CreateOrder, {
   connect: { },
-  mapProps: ({ transition }) => ({
-    onCreateOrderClick: () => transition({ view: 'order', orderId: uniqueId('order-') })
+  commands: ['doAddOrder'],
+  mapProps: ({ transition, doAddOrder }) => ({
+    onCreateOrderClick: () => {
+      const orderId = uuid();
+      return doAddOrder({ orderId })
+        .then(() => transition({ view: 'order', orderId }));
+    }
   })
 });
