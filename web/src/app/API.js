@@ -58,7 +58,12 @@ const toListWith = key => map => Object.keys(map).map(k => ({
 }));
 const toListWithId = toListWith('id');
 const toListWithName = toListWith('name');
-export const getRestaurantOrders = rid => PAPI.get(`orders/${rid}`).then(toListWithId);
+export const getRestaurantOrders = rid => PAPI.get(`orders/${rid}`).then(toListWithId).then(
+  orders => orders.map(order => ({
+    ...order,
+    peopleOrders: toListWithName(order.peopleOrders || {})
+  }))
+);
 export const getRestaurantOrder = (rid, oid) => PAPI.get(`orders/${rid}/${oid}`).then(order => ({
   ...order,
   peopleOrders: toListWithName(order.peopleOrders || {}),
