@@ -2,6 +2,7 @@ import React from 'react';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
 import { Restaurant } from 'model';
+import FlexView from 'FlexView';
 
 import './restaurantCard.scss';
 import './img/location-icon.png';
@@ -15,17 +16,15 @@ import './img/time-icon.png';
 })
 export default class RestaurantCard extends React.Component {
 
-  getLocals() {
-    const { name, address, imageURL } = this.props.restaurant;
-    const onClick = this.props.onClick;
+  getLocals({ restaurant: { name, address, imgURL }, onClick }) {
     // const [timeStart, timeEnd] = timeSlot;
-    return { name, address, imageURL, onClick };
+    return { name, address, imgURL, onClick };
   }
 
-  template({ name, imageURL, address, onClick }) {
+  template({ name, imgURL, address, onClick }) {
     return (
-      <div className='restaurant-card' onClick={onClick}>
-        <img src={imageURL} alt={name} />
+      <FlexView column className='restaurant-card' onClick={onClick}>
+        <div className='card-image' style={{ backgroundImage: `url(${imgURL})` }} />
         <div className='description'>
           <div className='description-container'>
             <p className='name'>{name}</p>
@@ -33,7 +32,7 @@ export default class RestaurantCard extends React.Component {
             {/* <i className='time-icon'></i>     <p className='time-slot'>12:30 - 14:55</p>*/}
           </div>
         </div>
-      </div>
+      </FlexView>
     );
   }
 

@@ -5,7 +5,7 @@ import './page.scss';
 
 export default class Page extends React.Component {
   render = () => (
-    <FlexView className='page' column hAlignContent='center' basis='100%'>
+    <FlexView className='page' column>
       {this.props.children}
     </FlexView>
   )

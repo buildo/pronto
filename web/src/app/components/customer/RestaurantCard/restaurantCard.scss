@@ -4,21 +4,33 @@ $imgHeight: 152px;
 $borderRadius: 4px;
 
 .restaurant-card {
+  margin: 10px;
+  cursor: pointer;
+  height: $height;
+  min-width: $width;
+  max-width: 400px;
+  border-radius: $borderRadius;
+  background-color: #e6eaee;
+  transition: transform 0.1s ease;
+
+
   // reset
   p, img, div {
     padding: 0;
     border: 0;
     margin: 0;
   }
-  cursor: pointer;
-  height: $height;
-  width: $width;
-  border-radius: $borderRadius;
-    background-color: #e6eaee;
-  img {
+
+  &:hover {
+    box-shadow: 0px 7px 20px 0px rgba(1,1,1,0.2);
+    transform: scale(1.05);
+  }
+
+  .card-image {
     height: $imgHeight;
-    width: $width;
-    vertical-align: middle;
+    height: 152px;
+    width: 100%;
+    background-size: cover;
     border-top-left-radius: $borderRadius;
     border-top-right-radius: $borderRadius;
   }

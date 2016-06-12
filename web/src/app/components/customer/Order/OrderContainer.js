@@ -3,11 +3,11 @@ import Order from './Order';
 
 export default container(Order, {
   connect: { },
-  commands: ['doAddPersonToOrder', 'doDeletePersonFromOrder'],
+  commands: ['doDeletePersonFromOrder'],
   queries: ['order'],
-  mapProps: ({ transition, doAddPersonToOrder, doDeletePersonFromOrder, order }) => ({
+  mapProps: ({ transition, doDeletePersonFromOrder, order }) => ({
     order,
-    onAddPersonClick: (personId) => doAddPersonToOrder(personId),
+    onAddPersonClick: (personId) => transition({ view: 'personOrder', personId }),
     onPersonClick: (personId) => () => {
       transition({ view: 'personOrder', personId });
     },
