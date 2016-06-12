@@ -1,6 +1,6 @@
 import { Command } from 'avenger';
-import { openRestaurant, closeRestaurant, updateRestaurant } from 'API';
 import t from 'tcomb';
+import { openRestaurant, closeRestaurant, updateRestaurant, patchOrder } from 'API';
 import { user, open, restaurantProfile } from 'queries';
 
 export const doRefreshUser = Command({
@@ -58,4 +58,18 @@ export const updateRestaurantProfile = Command({
   invalidates: { restaurantProfile },
   params: { profile: t.Object },
   run: ({ profile }) => updateRestaurant(0, profile)
+});
+
+export const doConfirmOrder = Command({
+  id: 'doConfirmOrder',
+  invalidates: {},
+  params: {
+    restaurantId: t.String,
+    orderId: t.String,
+    customerPhoneNumber: t.String,
+    tableName: t.String
+  },
+  run: ({ restaurantId: rId, orderId: oId, customerPhoneNumber, tableName }) => (
+    patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
+  )
 });
