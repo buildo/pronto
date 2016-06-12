@@ -2,4 +2,16 @@
   button {
     margin: 5px 0;
   }
+
+  .copy-input {
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+
+    > div {
+      pointer-events: none;
+    }
+  }
 }

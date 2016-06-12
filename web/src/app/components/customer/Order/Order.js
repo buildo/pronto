@@ -7,6 +7,8 @@ import { FlexView, Poll } from 'Basic';
 import { Order as OrderType } from 'model';
 import Modal from 'Modal';
 import OrderDetails from 'customer/OrderDetails';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import InputChildren from 'react-input-children';
 
 import './order.scss';
 
@@ -27,7 +29,8 @@ export default class Order extends React.Component {
     showNameModal: false,
     customerPhoneNumber: null,
     tableName: null,
-    name: null
+    name: null,
+    copied: false
   }
 
   state = {
@@ -65,19 +68,33 @@ export default class Order extends React.Component {
 
   closeNameModal = () => this.setState({ ...this.initialState, showNameModal: false })
 
+  onCopy = () => {
+    this.setState({ copied: true });
+    this.timeout = setTimeout(() => this.setState({ copied: false }), 5000);
+  }
+
+  componentWillUnmount() {
+    this.clearTimeout(this.timeout);
+  }
+
   getLocals({
     order: { peopleOrders: people }, onPersonClick,
     onDeletePersonClick, maxPeopleNumber, refresh
   }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
-      showNameModal, name
+      showNameModal, name, copied
     } = this.state;
 
     return {
       onPersonClick,
       showConfirmModal,
       showNameModal,
+      clipboardProps: {
+        text: window.location.href,
+        inputValue: copied ? 'Copiato!' : 'Copia',
+        onCopy: this.onCopy
+      },
       onAddPersonClick: people.length < maxPeopleNumber ? this.onAddPersonClick : undefined,
       onConfirmOrder: this.onConfirmOrder,
       openConfirmModal: this.openConfirmModal,
@@ -118,7 +135,7 @@ export default class Order extends React.Component {
   }
 
   template({
-    orderDetailsProps,
+    orderDetailsProps, clipboardProps,
     onAddPersonClick, onConfirmOrder,
     openConfirmModal, openNameModal,
     showConfirmModal, showNameModal,
@@ -136,6 +153,16 @@ export default class Order extends React.Component {
         <button className='primary' onClick={openConfirmModal}>
           Invia ordine
         </button>
+        <p>
+          Invia il link a tutti quelli che vuoi invitare
+        </p>
+        <CopyToClipboard {...clipboardProps}>
+          <InputChildren value={clipboardProps.text} readOnly wrapper={{ className: 'copy-input' }}>
+            <a style={{ margin: '0 5px', pointerEvents: 'none' }}>
+              {clipboardProps.inputValue}
+            </a>
+          </InputChildren>
+        </CopyToClipboard>
         {showConfirmModal && (
           <Modal {...modalConfirmProps}>
             <FlexView column>
