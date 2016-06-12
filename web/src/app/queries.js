@@ -102,5 +102,7 @@ export const order = Query({
 export const open = Query({
   id: 'open',
   returnType: t.Boolean,
-  fetch: () => Promise.resolve(JSON.parse(localStorage.getItem('open')))
+  fetch: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json')
+    .then(resp => resp.json())
+    .then(({ open }) => open)
 });
