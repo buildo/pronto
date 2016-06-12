@@ -1,6 +1,6 @@
 import container from 'container';
 import { t } from 'tcomb-react';
-import loadingDecorator from 'loading';
+import loadingDecorator from 'noLoading';
 import Menu from './Menu';
 import { OrderStatus } from 'model';
 
