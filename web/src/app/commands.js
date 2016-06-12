@@ -121,3 +121,9 @@ export const doAddOrder = Command({
     API.putOrder(restaurantId, orderId, { status: 'pending' })
   )
 });
+
+export const doRefreshOrder = Command({
+  id: 'doRefreshOrder',
+  invalidates: { order },
+  run: ::Promise.resolve
+});

@@ -3,7 +3,7 @@ import t from 'tcomb';
 import cx from 'classnames';
 import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
-import { FlexView } from 'Basic';
+import { FlexView, Poll } from 'Basic';
 import { Order as OrderType } from 'model';
 import Modal from 'Modal';
 import OrderDetails from 'customer/OrderDetails';
@@ -17,7 +17,8 @@ import './order.scss';
   onPersonClick: t.Function,
   onDeletePersonClick: t.Function,
   onConfirmOrder: t.Function,
-  maxPeopleNumber: t.Integer
+  maxPeopleNumber: t.Integer,
+  refresh: t.Function
 })
 export default class Order extends React.Component {
 
@@ -66,7 +67,7 @@ export default class Order extends React.Component {
 
   getLocals({
     order: { peopleOrders: people }, onPersonClick,
-    onDeletePersonClick, maxPeopleNumber
+    onDeletePersonClick, maxPeopleNumber, refresh
   }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
@@ -111,7 +112,8 @@ export default class Order extends React.Component {
         people,
         onEditPerson: onPersonClick,
         onDeletePerson: onDeletePersonClick
-      }
+      },
+      refresh
     };
   }
 
@@ -121,10 +123,12 @@ export default class Order extends React.Component {
     openConfirmModal, openNameModal,
     showConfirmModal, showNameModal,
     modalConfirmProps: { tableInputProps, telephoneInputProps, ...modalConfirmProps },
-    modalNameProps: { nameInputProps, ...modalNameProps }
+    modalNameProps: { nameInputProps, ...modalNameProps },
+    refresh
   }) {
     return (
       <FlexView className='order' grow column>
+        <Poll interval={3000} callback={refresh} />
         <OrderDetails {...orderDetailsProps} />
         <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
           Aggiungi persona
