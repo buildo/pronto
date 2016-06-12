@@ -40,12 +40,6 @@ export default class Order extends React.Component {
     }
   }
 
-  onDeletePersonClick = (personId) => {
-    if (window.confirm(`Eliminare l\'ordine di ${personId}?`)) {
-      this.props.onDeletePersonClick(personId);
-    }
-  }
-
   onConfirmOrder = () => {
     const { customerPhoneNumber, tableName } = this.state;
 
@@ -90,7 +84,7 @@ export default class Order extends React.Component {
     </FlexView>
   )
 
-  getLocals({ order: { people }, onPersonClick }) {
+  getLocals({ order: { people }, onPersonClick, onDeletePersonClick }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name
@@ -133,7 +127,7 @@ export default class Order extends React.Component {
       orderDetailsProps: {
         people,
         onEditPerson: onPersonClick,
-        onDeletePerson: this.onDeletePersonClick
+        onDeletePerson: onDeletePersonClick
       }
     };
   }
