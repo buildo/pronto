@@ -153,7 +153,7 @@ export default class Order extends React.Component {
         <OrderDetails {...orderDetailsProps} />
         {!orderSubmitted &&
           <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
-            Aggiungi persona
+            {!openNameModal ? 'Hai raggiunto il limite di persone' : 'Aggiungi persona'}
           </button>
         }
         {!orderSubmitted &&
