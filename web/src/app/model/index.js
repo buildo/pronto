@@ -14,7 +14,7 @@ export const MenuGroup = t.interface({
 
 export const Menu = t.interface({
   description: t.maybe(t.String),
-  groups: t.list(MenuGroup)
+  groups: t.maybe(t.list(MenuGroup))
 }, { name: 'Menu', strict: true });
 
 export const Person = t.interface({

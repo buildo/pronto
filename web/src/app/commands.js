@@ -1,7 +1,8 @@
 import { Command } from 'avenger';
 import t from 'tcomb';
-import { openRestaurant, closeRestaurant, updateRestaurant, patchOrder } from 'API';
-import { user, open, restaurantProfile } from 'queries';
+import { user, open, restaurantProfile, menu } from 'queries';
+import * as API from 'API';
+import { Menu } from 'model';
 
 export const doRefreshUser = Command({
   id: 'doRefreshUser',
@@ -38,13 +39,13 @@ export const doAddPersonToOrder = Command({
 export const doOpen = Command({
   id: 'doOpen',
   invalidates: { open },
-  run: () => openRestaurant(0)
+  run: () => API.openRestaurant(0)
 });
 
 export const doClose = Command({
   id: 'doClose',
   invalidates: { open },
-  run: () => closeRestaurant(0)
+  run: () => API.closeRestaurant(0)
 });
 
 export const doRefreshOpen = Command({
@@ -57,7 +58,14 @@ export const updateRestaurantProfile = Command({
   id: 'updateRestaurantProfile',
   invalidates: { restaurantProfile },
   params: { profile: t.Object },
-  run: ({ profile }) => updateRestaurant(0, profile)
+  run: ({ profile }) => API.updateRestaurant(0, profile)
+});
+
+export const doUpdateMenu = Command({
+  id: 'doUpdateMenu',
+  invalidates: { menu },
+  params: { restaurantId: t.String, menu: Menu },
+  run: ({ restaurantId, menu }) => API.updateMenu(restaurantId, menu)
 });
 
 export const doConfirmOrder = Command({
@@ -70,6 +78,6 @@ export const doConfirmOrder = Command({
     tableName: t.String
   },
   run: ({ restaurantId: rId, orderId: oId, customerPhoneNumber, tableName }) => (
-    patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
+    API.patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
   )
 });

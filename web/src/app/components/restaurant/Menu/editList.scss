@@ -1,0 +1,49 @@
+.edit-list {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  border-bottom-width: 3px;
+  font-size: 16px;
+
+  .edit-list, .edit-list input {
+    font-size: 13px;
+  }
+
+  .title {
+    margin: 5px;
+    font-size: 18px;
+  }
+
+  .list {
+    .list-item {
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+
+      input, textarea {
+        width: 100%;
+      }
+
+      .delete-button {
+        color: #ccc;
+        cursor: pointer;
+
+        &:hover {
+          color: tomato;
+        }
+      }
+    }
+  }
+
+  .add-button {
+    margin: 5px;
+    color: tomato;
+    cursor: pointer;
+
+    &:hover {
+      color: red;
+    }
+  }
+}
