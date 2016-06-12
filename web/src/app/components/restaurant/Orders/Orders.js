@@ -10,7 +10,7 @@ import { SubmittedOrder } from 'model';
 })
 export default class Orders extends React.Component {
   templateOrder = order => (
-    <div key={order.id}>{order.id} ({order.people.length} people)</div>
+    <div key={order.id}>{order.id} ({order.peopleOrders.length} people)</div>
   );
 
   template({ orders }) {

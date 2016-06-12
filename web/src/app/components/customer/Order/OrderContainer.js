@@ -8,10 +8,8 @@ export default container(Order, {
   mapProps: ({ transition, doDeletePersonFromOrder, order, doConfirmOrder }) => ({
     order,
     onAddPersonClick: (personId) => transition({ view: 'personOrder', personId }),
-    onPersonClick: (personId) => () => {
-      transition({ view: 'personOrder', personId });
-    },
-    onDeletePersonClick: (personId) => doDeletePersonFromOrder(personId),
+    onPersonClick: (personId) => transition({ view: 'personOrder', personId }),
+    onDeletePersonClick: personId => doDeletePersonFromOrder({ personId }),
     onConfirmOrder: doConfirmOrder
   })
 });

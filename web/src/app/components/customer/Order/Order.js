@@ -5,6 +5,7 @@ import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
 import { Order as OrderType } from 'model';
 import Modal from 'Modal';
+import OrderDetails from 'customer/OrderDetails';
 
 import './order.scss';
 
@@ -39,13 +40,6 @@ export default class Order extends React.Component {
     }
   }
 
-  onDeletePersonClick = (personId) => (e) => {
-    e.stopPropagation();
-    if (window.confirm(`Eliminare l\'ordine di ${personId}?`)) {
-      this.props.onDeletePersonClick(personId);
-    }
-  }
-
   onConfirmOrder = () => {
     const { customerPhoneNumber, tableName } = this.state;
 
@@ -68,41 +62,17 @@ export default class Order extends React.Component {
 
   closeNameModal = () => this.setState({ ...this.initialState, showNameModal: false })
 
-  templatePersonItem = (item, key) => (
-    <FlexView key={key}>
-      {item}
-    </FlexView>
-  )
-
-  templatePerson = ({ onPersonClick, onDeletePersonClick }) => (person, key) => (
-    <FlexView key={key} column>
-      <FlexView onClick={onPersonClick(person.name)}>
-        <FlexView grow>
-          {person.name}
-        </FlexView>
-        <FlexView hAlignContent='right' onClick={onDeletePersonClick(person.name)}>
-          x
-        </FlexView>
-      </FlexView>
-      <FlexView className='items' column>
-        {person.items.map(this.templatePersonItem)}
-      </FlexView>
-    </FlexView>
-  )
-
-  getLocals({ order, onPersonClick }) {
+  getLocals({ order: { peopleOrders: people }, onPersonClick, onDeletePersonClick }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name
     } = this.state;
 
     return {
-      order,
       onPersonClick,
       showConfirmModal,
       showNameModal,
       onAddPersonClick: this.onAddPersonClick,
-      onDeletePersonClick: this.onDeletePersonClick,
       onConfirmOrder: this.onConfirmOrder,
       openConfirmModal: this.openConfirmModal,
       openNameModal: this.openNameModal,
@@ -131,12 +101,40 @@ export default class Order extends React.Component {
           value: name,
           onChange: ({ target: { value: name } }) => this.setState({ name })
         }
+      },
+      orderDetailsProps: {
+        people,
+        onEditPerson: onPersonClick,
+        onDeletePerson: onDeletePersonClick
       }
     };
   }
 
+  templatePersonItem = (item, key) => (
+    <FlexView key={key}>
+      {item}
+    </FlexView>
+  )
+
+  templatePerson = ({ onPersonClick, onDeletePersonClick }) => (person, key) => (
+    <FlexView key={key} column>
+      <FlexView onClick={onPersonClick(person.name)}>
+        <FlexView grow>
+          {person.name}
+        </FlexView>
+        <FlexView hAlignContent='right' onClick={onDeletePersonClick(person.name)}>
+          x
+        </FlexView>
+      </FlexView>
+      <FlexView className='items' column>
+        {person.items.map(this.templatePersonItem)}
+      </FlexView>
+    </FlexView>
+  )
+
+
   template({
-    order, onPersonClick, onDeletePersonClick,
+    orderDetailsProps,
     onAddPersonClick, onConfirmOrder,
     openConfirmModal, openNameModal,
     showConfirmModal, showNameModal,
@@ -144,14 +142,12 @@ export default class Order extends React.Component {
     modalNameProps: { nameInputProps, ...modalNameProps }
   }) {
     return (
-      <FlexView className='order' column>
-        <FlexView className='people' column>
-          {order.people.map(this.templatePerson({ onPersonClick, onDeletePersonClick }))}
-        </FlexView>
+      <FlexView className='order' grow column>
+        <OrderDetails {...orderDetailsProps} />
         <button onClick={openNameModal}>
           Aggiungi persona
         </button>
-        <button onClick={openConfirmModal}>
+        <button className='primary' onClick={openConfirmModal}>
           Invia ordine
         </button>
         {showConfirmModal && (

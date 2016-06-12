@@ -54,21 +54,16 @@ export const orders = Query({
 export const order = Query({
   id: 'order',
   returnType: Order,
-  fetch: () => Promise.resolve(Order({
-    id: 'deredede',
-    status: 'pending',
-    people: [{
-      name: 'aski',
-      items: [
-        'Simcoe'
-      ]
-    }, {
-      name: 'Gio',
-      items: [
-        'Spaghetti alla Carbonara'
-      ]
-    }]
-  }))
+  params: {
+    restaurantId: t.String,
+    orderId: t.String
+  },
+  fetch: ({ restaurantId, orderId }) => {
+    return API.getRestaurantOrder(restaurantId, orderId).then(order => ({
+      ...order,
+      peopleOrders: (order.peopleOrders || []).filter(x => x)
+    }));
+  }
 });
 
 export const open = Query({
