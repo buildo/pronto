@@ -5,6 +5,7 @@ import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
 import { Order as OrderType } from 'model';
 import Modal from 'Modal';
+import OrderDetails from 'customer/OrderDetails';
 
 import './order.scss';
 
@@ -39,8 +40,7 @@ export default class Order extends React.Component {
     }
   }
 
-  onDeletePersonClick = (personId) => (e) => {
-    e.stopPropagation();
+  onDeletePersonClick = (personId) => {
     if (window.confirm(`Eliminare l\'ordine di ${personId}?`)) {
       this.props.onDeletePersonClick(personId);
     }
@@ -90,19 +90,17 @@ export default class Order extends React.Component {
     </FlexView>
   )
 
-  getLocals({ order, onPersonClick }) {
+  getLocals({ order: { people }, onPersonClick }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name
     } = this.state;
 
     return {
-      order,
       onPersonClick,
       showConfirmModal,
       showNameModal,
       onAddPersonClick: this.onAddPersonClick,
-      onDeletePersonClick: this.onDeletePersonClick,
       onConfirmOrder: this.onConfirmOrder,
       openConfirmModal: this.openConfirmModal,
       openNameModal: this.openNameModal,
@@ -131,12 +129,17 @@ export default class Order extends React.Component {
           value: name,
           onChange: ({ target: { value: name } }) => this.setState({ name })
         }
+      },
+      orderDetailsProps: {
+        people,
+        onEditPerson: onPersonClick,
+        onDeletePerson: this.onDeletePersonClick
       }
     };
   }
 
   template({
-    order, onPersonClick, onDeletePersonClick,
+    orderDetailsProps,
     onAddPersonClick, onConfirmOrder,
     openConfirmModal, openNameModal,
     showConfirmModal, showNameModal,
@@ -144,10 +147,8 @@ export default class Order extends React.Component {
     modalNameProps: { nameInputProps, ...modalNameProps }
   }) {
     return (
-      <FlexView className='order' column>
-        <FlexView className='people' column>
-          {order.people.map(this.templatePerson({ onPersonClick, onDeletePersonClick }))}
-        </FlexView>
+      <FlexView className='order' grow column>
+        <OrderDetails {...orderDetailsProps} />
         <button onClick={openNameModal}>
           Aggiungi persona
         </button>
