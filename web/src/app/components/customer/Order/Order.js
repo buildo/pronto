@@ -11,7 +11,8 @@ import { Order as OrderType } from 'model';
   order: OrderType,
   onAddPersonClick: t.Function,
   onPersonClick: t.Function,
-  onDeletePersonClick: t.Function
+  onDeletePersonClick: t.Function,
+  onConfirmOrder: t.Function
 })
 export default class Order extends React.Component {
 
@@ -26,6 +27,16 @@ export default class Order extends React.Component {
       this.props.onDeletePersonClick(personId);
     }
   }
+
+  onConfirmOrder = () => {
+    const { customerPhoneNumber, tableName } = this.state;
+    this.props.onConfirmOrder({ customerPhoneNumber, tableName });
+    this.setState({ ...this.initialState });
+  }
+
+  openModal = () => this.setState({ ...this.initialState, showConfirmModal: true })
+
+  closeModal = () => this.setState({ ...this.initialState, showConfirmModal: false })
 
   templatePersonItem = (item, key) => (
     <FlexView key={key}>
