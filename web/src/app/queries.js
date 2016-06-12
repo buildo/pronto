@@ -3,40 +3,6 @@ import t from 'tcomb';
 import * as API from 'API';
 import { Menu, Order, Restaurant, SubmittedOrder } from 'model';
 
-const restaurantFixture = Restaurant({
-  _id: 'dmiojdeinuinfuiw',
-  menu: {
-    description: 'Primo e secondo 10€',
-    groups: [{
-      name: 'Primi',
-      items: [{
-        name: 'Spaghetti alla Carbonara',
-        description: 'Con pancetta di qualità'
-      }, {
-        name: 'Simcoe',
-        description: '200g di carne bovina'
-      }]
-    }, {
-      name: 'Secondi',
-      items: [{
-        name: 'Zigoiner',
-        description: 'Su palo di abete'
-      }]
-    }]
-  },
-  profile: {
-    name: 'Blue Ginger',
-    description: 'Asian food',
-    telephone: '02 123432432',
-    address: 'via Tortona 35, Milano',
-    imgURL: 'https://cdn0.deliveroo.co.uk/media/restaurants/18077/1140x640.jpg'
-  },
-  open: true,
-  maxPeoplePerOrder: 10,
-  orders: []
-});
-
-
 export const user = Query({
   id: 'user',
   returnType: t.Any,
@@ -46,13 +12,14 @@ export const user = Query({
 export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
-  fetch: () => Promise.resolve([ restaurantFixture ])
+  fetch: API.getRestaurants
 });
 
 export const restaurant = Query({
   id: 'restaurant',
+  params: { restaurantId: t.String },
   returnType: Restaurant,
-  fetch: (/* { restaurantId }*/) => Promise.resolve(restaurantFixture)
+  fetch: ({ restaurantId }) => API.getRestaurant(restaurantId)
 });
 
 export const menu = Query({
@@ -102,7 +69,5 @@ export const order = Query({
 export const open = Query({
   id: 'open',
   returnType: t.Boolean,
-  fetch: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json')
-    .then(resp => resp.json())
-    .then(({ open }) => open)
+  fetch: () => API.isRestaurantOpen(0)
 });

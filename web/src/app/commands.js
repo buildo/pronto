@@ -1,4 +1,5 @@
 import { Command } from 'avenger';
+import { openRestaurant, closeRestaurant } from 'API';
 import { user, open } from 'queries';
 
 export const doRefreshUser = Command({
@@ -36,25 +37,13 @@ export const doAddPersonToOrder = Command({
 export const doOpen = Command({
   id: 'doOpen',
   invalidates: { open },
-  run: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ open: true })
-  })
+  run: () => openRestaurant(0)
 });
 
 export const doClose = Command({
   id: 'doClose',
   invalidates: { open },
-  run: () => fetch('https://pronto-9842a.firebaseio.com/restaurants/1.json', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ open: false })
-  })
+  run: () => closeRestaurant(0)
 });
 
 export const doRefreshOpen = Command({

@@ -1,28 +1,21 @@
 import t from 'tcomb';
 
 export const MenuItem = t.interface({
+  shortName: t.String,
   name: t.String,
   price: t.maybe(t.Number),
   description: t.maybe(t.String)
 }, { name: 'MenuItem', strict: true });
 
 export const MenuGroup = t.interface({
-  name: t.String,
-  items: t.list(MenuItem)
+  description: t.String,
+  items: t.maybe(t.list(MenuItem))
 }, { name: 'MenuGroup', strict: true });
 
 export const Menu = t.interface({
   description: t.maybe(t.String),
   groups: t.list(MenuGroup)
 }, { name: 'Menu', strict: true });
-
-export const RestaurantProfile = t.interface({
-  name: t.String,
-  description: t.maybe(t.String),
-  telephone: t.String,
-  address: t.String,
-  imgURL: t.String
-}, { name: 'RestaurantProfile', strict: true });
 
 export const Person = t.interface({
   name: t.String,
@@ -46,11 +39,14 @@ export const SubmittedOrder = t.refinement(Order, order => {
 }, 'SubmittedOrder');
 
 export const Restaurant = t.interface({
-  _id: t.String,
   menu: Menu,
-  profile: RestaurantProfile,
+  name: t.String,
+  description: t.maybe(t.String),
+  telephone: t.String,
+  address: t.String,
   // account: FirebasAccount,
   open: t.Boolean, // on/off
-  maxPeoplePerOrder: t.Integer,
-  orders: t.list(SubmittedOrder)
+  maxPeopleNumber: t.Integer,
+  imgUrl: t.maybe(t.String)//,
+  // orders: t.list(SubmittedOrder)
 }, { name: 'Restaurant', strict: true });

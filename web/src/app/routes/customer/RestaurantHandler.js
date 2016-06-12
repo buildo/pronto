@@ -4,8 +4,6 @@ import Page, { Header, Content, Footer } from 'customer/Page';
 import RightSidebar from 'customer/RightSidebar';
 import Menu from 'customer/Menu';
 
-console.log({ Page });
-
 export default class RestaurantHandler extends React.Component {
   render() {
     return (

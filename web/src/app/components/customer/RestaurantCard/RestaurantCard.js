@@ -1,7 +1,7 @@
 import React from 'react';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
-import { RestaurantProfile } from 'model';
+import { Restaurant } from 'model';
 
 import './restaurantCard.scss';
 import './img/location-icon.png';
@@ -10,22 +10,22 @@ import './img/time-icon.png';
 @pure
 @skinnable()
 @props({
-  profile: RestaurantProfile,
+  restaurant: Restaurant,
   onClick: t.Function
 })
 export default class RestaurantCard extends React.Component {
 
   getLocals() {
-    const { name, address, imgURL } = this.props.profile;
+    const { name, address, imageURL } = this.props.restaurant;
     const onClick = this.props.onClick;
     // const [timeStart, timeEnd] = timeSlot;
-    return { name, address, imgURL, onClick };
+    return { name, address, imageURL, onClick };
   }
 
-  template({ name, imgURL, address, onClick }) {
+  template({ name, imageURL, address, onClick }) {
     return (
       <div className='restaurant-card' onClick={onClick}>
-        <img src={imgURL} alt={name} />
+        <img src={imageURL} alt={name} />
         <div className='description'>
           <div className='description-container'>
             <p className='name'>{name}</p>

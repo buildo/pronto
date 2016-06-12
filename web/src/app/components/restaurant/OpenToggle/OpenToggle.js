@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Toggle, Poll } from 'Basic';
 import { pure, skinnable } from 'revenge';
 
-const wrapperStyle = { cursor: 'pointer' };
-
 @pure
 @skinnable()
 export default class OpenToggle extends React.Component {
@@ -14,16 +12,16 @@ export default class OpenToggle extends React.Component {
         style: { margin: 10 }
       },
       toggleProps: {
-        value: open
+        value: open,
+        onChange: onClick
       },
-      refresh,
-      onClick
+      refresh
     };
   }
 
-  template({ labelProps, toggleProps, refresh, onClick }) {
+  template({ labelProps, toggleProps, refresh }) {
     return (
-      <View vAlignContent='center' onClick={onClick} style={wrapperStyle}>
+      <View vAlignContent='center'>
         <View {...labelProps} />
         <Toggle {...toggleProps} />
         <Poll interval={2000} callback={refresh} />
