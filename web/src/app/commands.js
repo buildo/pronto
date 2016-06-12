@@ -113,3 +113,14 @@ export const doConfirmOrder = Command({
     API.patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
   )
 });
+
+export const doAddOrder = Command({
+  id: 'doAddOrder',
+  params: {
+    restaurantId: t.String,
+    orderId: t.String
+  },
+  run: ({ restaurantId, orderId }) => (
+    API.putOrder(restaurantId, orderId, { status: 'pending' })
+  )
+});
