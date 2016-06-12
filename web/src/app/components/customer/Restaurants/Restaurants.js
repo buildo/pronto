@@ -15,7 +15,7 @@ export default class Restaurants extends React.Component {
 
   template({ restaurants, onRestaurantClick }) {
     return (
-      <FlexView className='restaurants'>
+      <FlexView className='restaurants' wrap hAlignContent='center'>
         {restaurants.map((r, i) => (
           <RestaurantCard restaurant={r} onClick={onRestaurantClick(i)} key={i} />
         ))}
