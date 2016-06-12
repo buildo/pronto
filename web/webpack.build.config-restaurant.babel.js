@@ -37,11 +37,16 @@ if (config.uglify) {
 module.exports = {
   ...base,
 
-  entry: path.resolve(paths.SRC, 'client/index.js'),
+  entry: path.resolve(paths.SRC, 'client/restaurant.js'),
 
   devtool: 'source-map',
 
   plugins: plugins.concat(base.plugins),
+
+  output: {
+    ...base.output,
+    path: paths.BUILD_RESTAURANT
+  },
 
   module: {
     ...base.module,

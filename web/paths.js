@@ -7,6 +7,8 @@ module.exports = {
   THEME_VARIABLES: path.resolve(__dirname, 'src/app/theme/variables.scss'),
   THEME_FONTS: path.resolve(__dirname, 'src/app/theme/fonts'),
   BUILD: path.resolve(__dirname, 'build'),
+  BUILD_CUSTOMER: path.resolve(__dirname, 'build/customer'),
+  BUILD_RESTAURANT: path.resolve(__dirname, 'build/restaurant'),
   ASSETS: path.resolve(__dirname, 'assets'),
   TEST: path.resolve(__dirname, 'test'),
   NODE_MODULES: path.resolve(__dirname, 'node_modules'),
