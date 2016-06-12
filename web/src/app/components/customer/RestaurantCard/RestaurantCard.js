@@ -2,6 +2,7 @@ import React from 'react';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
 import { Restaurant } from 'model';
+import FlexView from 'FlexView';
 
 import './restaurantCard.scss';
 import './img/location-icon.png';
@@ -22,7 +23,7 @@ export default class RestaurantCard extends React.Component {
 
   template({ name, imgURL, address, onClick }) {
     return (
-      <div className='restaurant-card' onClick={onClick}>
+      <FlexView column className='restaurant-card' onClick={onClick} basis={'25%'}>
         <img src={imgURL} alt={name} />
         <div className='description'>
           <div className='description-container'>
@@ -31,7 +32,7 @@ export default class RestaurantCard extends React.Component {
             {/* <i className='time-icon'></i>     <p className='time-slot'>12:30 - 14:55</p>*/}
           </div>
         </div>
-      </div>
+      </FlexView>
     );
   }
 
