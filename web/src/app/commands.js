@@ -49,7 +49,24 @@ export const doDeletePersonFromOrder = Command({
 
 export const doAddPersonToOrder = Command({
   id: 'doAddPersonToOrder',
-  run: () => Promise.resolve()
+  params: {
+    restaurantId: t.String,
+    orderId: t.String,
+    personId: t.String,
+    personItems: t.list(t.String),
+    order: Order
+  },
+  invalidates: { order },
+  run: ({
+    restaurantId, orderId, personId: name,
+    personItems: items, order: { peopleOrders = [] }
+  }) => {
+    if (items.length > 0) {
+      return API.putPerson(restaurantId, orderId, peopleOrders.concat({ name, items }));
+    } else {
+      return Promise.resolve();
+    }
+  }
 });
 
 export const doOpen = Command({

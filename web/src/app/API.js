@@ -82,3 +82,7 @@ export const patchOrder = (rid, oid, body) => {
 export const replacePeopleOrdersInRestaurantOrder = (rid, oid, peopleOrders) => {
   return PAPI.put(`orders/${rid}/${oid}/peopleOrders`, peopleOrders);
 };
+
+export const putPerson = (rid, oid, body) => {
+  return PAPI.put(`orders/${rid}/${oid}/peopleOrders`, body);
+};

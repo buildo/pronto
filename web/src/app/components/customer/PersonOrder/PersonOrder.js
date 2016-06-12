@@ -8,7 +8,7 @@ import OrderDetails from 'customer/OrderDetails';
 @skinnable()
 @props({
   personItems: t.list(t.String),
-  personId: t.String,
+  personId: t.maybe(t.String),
   onCancel: t.Function,
   onConfirm: t.Function
 })

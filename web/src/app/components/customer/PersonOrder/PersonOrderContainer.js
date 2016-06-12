@@ -5,10 +5,14 @@ import PersonOrder from './PersonOrder';
 export default container(PersonOrder, {
   connect: { personItems: t.maybe(t.list(t.String)), personId: t.maybe(t.String) },
   commands: ['doAddPersonToOrder'],
-  mapProps: ({ personItems = [], personId, transition, doAddPersonToOrder }) => ({
+  queries: ['order'],
+  mapProps: ({ personItems = [], personId, transition, doAddPersonToOrder, order }) => ({
     personItems,
     personId,
-    onCancel: () => transition({ view: 'order', personId: null, personItems: null }),
-    onConfirm: doAddPersonToOrder
+    onCancel: () => transition({ view: 'order', personItems: null }),
+    onConfirm: () => {
+      return doAddPersonToOrder({ order })
+        .then(() => transition({ view: 'order', personItems: null }));
+    }
   })
 });
