@@ -22,6 +22,10 @@ orders.on('child_changed', data => {
   }
 });
 
+restaurant.once('value', data => {
+  updateLedStatus(data.val().open);
+});
+
 // listen on 'open' status of restaurant
 restaurant.on('child_changed', data => {
   if (data.key === 'open') {
@@ -30,14 +34,15 @@ restaurant.on('child_changed', data => {
   }
 });
 
+const led = new Gpio(27, 'low');
 function updateLedStatus(status) {
-// TODO: actually update the led status
+  led.write(status ? 1 : 0);
   const s = status ? 'ON' : 'OFF';
   console.log(`The led is now ${s}`);
 }
 
 const toggleOpenStatus = require('./toggleOpenStatus');
-const button = new Gpio(17, 'in', 'falling');
+const button = new Gpio(17, 'in', 'falling', { debounceTimeout : 200 });
 button.watch((err,value) => {
   toggleOpenStatus();
   console.log("open status toggled");

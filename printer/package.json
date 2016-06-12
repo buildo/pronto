@@ -9,6 +9,7 @@
   "author": "buildo",
   "dependencies": {
     "firebase": "^3.0.4",
-    "tcomb": "^3.2.2"
+    "tcomb": "^3.2.2",
+    "onoff": "^1.1.1"
   }
 }
