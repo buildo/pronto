@@ -86,7 +86,11 @@ export default class OrderDetails extends React.Component {
     return (
       <FlexView className='order-details' column shrink={false}>
         {people.map(person => (
-          this.templatePerson({ ...person, onEditPerson, onDeletePerson: openConfirmModal })
+          this.templatePerson({
+            ...person,
+            onEditPerson,
+            onDeletePerson: onDeletePerson && openConfirmModal
+          })
         ))}
         {showConfirmModal && (
           <Modal {...modalProps}>
