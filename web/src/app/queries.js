@@ -36,7 +36,7 @@ export const menu = Query({
   },
   params: { restaurant: Restaurant },
   returnType: Menu,
-  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu)
+  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu) // TODO(gio): handle missing menu here
 });
 
 export const restaurantOrders = Query({
@@ -65,6 +65,7 @@ export const order = Query({
 
 export const open = Query({
   id: 'open',
+  params: { restaurantId: t.String },
   returnType: t.Boolean,
-  fetch: () => API.isRestaurantOpen(0)
+  fetch: ({ restaurantId }) => API.isRestaurantOpen(restaurantId)
 });

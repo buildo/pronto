@@ -63,14 +63,16 @@ export const doAddPersonToOrder = Command({
 
 export const doOpen = Command({
   id: 'doOpen',
+  params: { restaurantId: t.String },
   invalidates: { open },
-  run: () => API.openRestaurant(0)
+  run: ({ restaurantId }) => API.openRestaurant(restaurantId)
 });
 
 export const doClose = Command({
   id: 'doClose',
+  params: { restaurantId: t.String },
   invalidates: { open },
-  run: () => API.closeRestaurant(0)
+  run: ({ restaurantId }) => API.closeRestaurant(restaurantId)
 });
 
 export const doRefreshOpen = Command({
@@ -82,8 +84,11 @@ export const doRefreshOpen = Command({
 export const updateRestaurantProfile = Command({
   id: 'updateRestaurantProfile',
   invalidates: { restaurantProfile },
-  params: { profile: t.Object },
-  run: ({ profile }) => API.updateRestaurant(0, profile)
+  params: {
+    restaurantId: t.String,
+    profile: t.Object
+  },
+  run: ({ profile, restaurantId }) => API.updateRestaurant(restaurantId, profile)
 });
 
 export const doUpdateMenu = Command({
