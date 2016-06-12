@@ -1,5 +1,5 @@
 import { Command } from 'avenger';
-import { openRestaurant, closeRestaurant } from 'API';
+import { openRestaurant, closeRestaurant, updateRestaurant } from 'API';
 import t from 'tcomb';
 import { user, open, restaurantProfile } from 'queries';
 
@@ -57,5 +57,5 @@ export const updateRestaurantProfile = Command({
   id: 'updateRestaurantProfile',
   invalidates: { restaurantProfile },
   params: { profile: t.Object },
-  run: ({ profile }) => Promise.resolve({ profile })
+  run: ({ profile }) => updateRestaurant(0, profile)
 });

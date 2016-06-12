@@ -25,11 +25,7 @@ export const restaurant = Query({
 export const restaurantProfile = Query({
   id: 'restaurantProfile',
   returnType: t.Object, // TODO change
-  fetch: (/* { restaurantId }*/) => Promise.resolve({ // TODO use real API
-    ...restaurantFixture.profile,
-    maxPeoplePerOrder: restaurantFixture.maxPeoplePerOrder,
-    imgUrl: 'https://volo-images.s3.amazonaws.com/production/it/list-hero.jpg'
-  })
+  fetch: (/* { restaurantId }*/) => API.getRestaurant(0)
 });
 
 export const menu = Query({
