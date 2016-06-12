@@ -1,8 +1,9 @@
 import { Command } from 'avenger';
 import t from 'tcomb';
-import { user, open, restaurantProfile, menu } from 'queries';
+import { user, open, restaurantProfile, menu, order } from 'queries';
 import * as API from 'API';
-import { Menu } from 'model';
+import { Menu, Order } from 'model';
+import findIndex from 'lodash/findIndex';
 
 export const doRefreshUser = Command({
   id: 'doRefreshUser',
@@ -28,7 +29,22 @@ export const doLogout = Command({
 
 export const doDeletePersonFromOrder = Command({
   id: 'doDeletePersonFromOrder',
-  run: () => Promise.resolve()
+  params: {
+    restaurantId: t.String,
+    orderId: t.String,
+    order: Order,
+    personId: t.String
+  },
+  invalidates: { order },
+  run: ({ restaurantId, orderId, order, personId }) => {
+    const personIndex = findIndex(order.peopleOrders, { name: personId });
+    const peopleOrders = order.peopleOrders || [];
+    return API.replacePeopleOrdersInRestaurantOrder(
+      restaurantId,
+      orderId,
+      peopleOrders.slice(0, personIndex).concat(peopleOrders.slice(personIndex + 1))
+    );
+  }
 });
 
 export const doAddPersonToOrder = Command({
@@ -70,7 +86,6 @@ export const doUpdateMenu = Command({
 
 export const doConfirmOrder = Command({
   id: 'doConfirmOrder',
-  invalidates: {},
   params: {
     restaurantId: t.String,
     orderId: t.String,

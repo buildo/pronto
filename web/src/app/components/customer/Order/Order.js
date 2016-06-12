@@ -147,7 +147,7 @@ export default class Order extends React.Component {
         <button onClick={openNameModal}>
           Aggiungi persona
         </button>
-        <button onClick={openConfirmModal}>
+        <button className='primary' onClick={openConfirmModal}>
           Invia ordine
         </button>
         {showConfirmModal && (

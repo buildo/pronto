@@ -9,7 +9,7 @@ export default container(Order, {
     order,
     onAddPersonClick: (personId) => transition({ view: 'personOrder', personId }),
     onPersonClick: (personId) => transition({ view: 'personOrder', personId }),
-    onDeletePersonClick: doDeletePersonFromOrder,
+    onDeletePersonClick: personId => doDeletePersonFromOrder({ personId }),
     onConfirmOrder: doConfirmOrder
   })
 });

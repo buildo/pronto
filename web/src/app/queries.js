@@ -58,7 +58,12 @@ export const order = Query({
     restaurantId: t.String,
     orderId: t.String
   },
-  fetch: ({ restaurantId, orderId }) => API.getRestaurantOrder(restaurantId, orderId)
+  fetch: ({ restaurantId, orderId }) => {
+    return API.getRestaurantOrder(restaurantId, orderId).then(order => ({
+      ...order,
+      peopleOrders: (order.peopleOrders || []).filter(x => x)
+    }));
+  }
 });
 
 export const open = Query({

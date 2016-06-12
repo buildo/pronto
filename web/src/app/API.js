@@ -25,6 +25,12 @@ const PAPI = {
       },
       body: JSON.stringify(body)
     });
+  },
+
+  delete: (resource) => {
+    return fetch(`${baseUrl}${resource}.json`, {
+      method: 'DELETE'
+    });
   }
 };
 
@@ -66,9 +72,13 @@ export const getRestaurantOrder = (rid, oid) => {
 };
 
 export const putRestaurantOrderPerson = (rid, oid, uid, body) => {
-  return PAPI.put(`orders/${rid}/${oid}/peopleOrders/{uid}`, body);
+  return PAPI.put(`orders/${rid}/${oid}/peopleOrders/${uid}`, body);
 };
 
 export const patchOrder = (rid, oid, body) => {
   return PAPI.patch(`orders/${rid}/${oid}`, body);
+};
+
+export const replacePeopleOrdersInRestaurantOrder = (rid, oid, peopleOrders) => {
+  return PAPI.put(`orders/${rid}/${oid}/peopleOrders`, peopleOrders);
 };

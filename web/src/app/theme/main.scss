@@ -7,3 +7,32 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+button {
+  width: 100%;
+	height: 42px;
+  max-width: 300px;
+	border-radius: 100px;
+  background-image: linear-gradient(to top, #f2f4f7, #ffffff);
+	border: solid 1px #ced0da;
+  font-size: 12px;
+	letter-spacing: 0.5px;
+	text-align: center;
+  text-transform: uppercase;
+  color: #354052;
+
+  &:hover {
+    background-image: linear-gradient(to top, #e0e0e0, #ffffff);
+  }
+
+  &.primary {
+    background-image: linear-gradient(to bottom, #f56e21, #ff5c00);
+    border: solid 1px #f66b1c;
+    color: white;
+
+    &:hover {
+      background-image: linear-gradient(to bottom, #f56e21, #ff5c00);
+      opacity: 0.9;
+    }
+  }
+}
