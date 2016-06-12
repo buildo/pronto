@@ -1,1 +1,1 @@
-export default from './RestaurantDetailsHeader';
+export default from './RestaurantDetailsHeaderContainer';
