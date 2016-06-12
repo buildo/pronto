@@ -150,6 +150,13 @@ export default class Order extends React.Component {
     return (
       <FlexView className='order' grow column>
         {!orderSubmitted && <Poll interval={3000} callback={refresh} />}
+        {orderSubmitted && (
+          <FlexView column>
+            <h1 style={{ color: orange }}>Ordine inviato!</h1>
+            <p>Presentati al ristorante quando vuoi</p>
+            <h3>Ecco il riepilogo del tuo ordine</h3>
+          </FlexView>
+        )}
         <OrderDetails {...orderDetailsProps} />
         {!orderSubmitted &&
           <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
@@ -202,12 +209,6 @@ export default class Order extends React.Component {
               </button>
             </FlexView>
           </Modal>
-        )}
-        {orderSubmitted && (
-          <FlexView column>
-            <h1 style={{ color: orange }}>Ordine inviato!</h1>
-            <p>Presentati al ristorante quando vuoi</p>
-          </FlexView>
         )}
       </FlexView>
     );
