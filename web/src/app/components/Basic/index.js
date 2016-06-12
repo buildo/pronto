@@ -3,3 +3,4 @@ export View from './FlexView';
 export LoadingSpinner from './LoadingSpinner';
 export Poll from './Poll';
 export Toggle from './Toggle';
+export Button from './Button';

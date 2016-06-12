@@ -22,6 +22,12 @@ export const restaurant = Query({
   fetch: ({ restaurantId }) => API.getRestaurant(restaurantId)
 });
 
+export const restaurantProfile = Query({
+  id: 'restaurantProfile',
+  returnType: t.Object, // TODO change
+  fetch: (/* { restaurantId }*/) => API.getRestaurant(0)
+});
+
 export const menu = Query({
   id: 'menu',
   dependencies: {
