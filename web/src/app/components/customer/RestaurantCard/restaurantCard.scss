@@ -5,6 +5,13 @@ $borderRadius: 4px;
 
 .restaurant-card {
   margin: 10px;
+  cursor: pointer;
+  height: $height;
+  width: $width;
+  border-radius: $borderRadius;
+  background-color: #e6eaee;
+  transition: transform 0.1s ease;
+
 
   // reset
   p, img, div {
@@ -12,11 +19,12 @@ $borderRadius: 4px;
     border: 0;
     margin: 0;
   }
-  cursor: pointer;
-  height: $height;
-  width: $width;
-  border-radius: $borderRadius;
-    background-color: #e6eaee;
+
+  &:hover {
+    box-shadow: 0px 7px 20px 0px rgba(1,1,1,0.2);
+    transform: scale(1.05);
+  }
+
   img {
     height: $imgHeight;
     width: 100%;
