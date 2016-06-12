@@ -23,8 +23,8 @@ export default class RestaurantCard extends React.Component {
 
   template({ name, imgURL, address, onClick }) {
     return (
-      <FlexView column className='restaurant-card' onClick={onClick} basis={'25%'}>
-        <img src={imgURL} alt={name} />
+      <FlexView column className='restaurant-card' onClick={onClick}>
+        <div className='card-image' style={{ backgroundImage: `url(${imgURL})` }} />
         <div className='description'>
           <div className='description-container'>
             <p className='name'>{name}</p>

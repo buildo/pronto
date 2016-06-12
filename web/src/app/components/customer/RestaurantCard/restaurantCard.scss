@@ -7,7 +7,8 @@ $borderRadius: 4px;
   margin: 10px;
   cursor: pointer;
   height: $height;
-  width: $width;
+  min-width: $width;
+  max-width: 400px;
   border-radius: $borderRadius;
   background-color: #e6eaee;
   transition: transform 0.1s ease;
@@ -25,10 +26,11 @@ $borderRadius: 4px;
     transform: scale(1.05);
   }
 
-  img {
+  .card-image {
     height: $imgHeight;
+    height: 152px;
     width: 100%;
-    vertical-align: middle;
+    background-size: cover;
     border-top-left-radius: $borderRadius;
     border-top-right-radius: $borderRadius;
   }
