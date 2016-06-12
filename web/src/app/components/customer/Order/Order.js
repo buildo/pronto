@@ -62,29 +62,7 @@ export default class Order extends React.Component {
 
   closeNameModal = () => this.setState({ ...this.initialState, showNameModal: false })
 
-  templatePersonItem = (item, key) => (
-    <FlexView key={key}>
-      {item}
-    </FlexView>
-  )
-
-  templatePerson = ({ onPersonClick, onDeletePersonClick }) => (person, key) => (
-    <FlexView key={key} column>
-      <FlexView onClick={onPersonClick(person.name)}>
-        <FlexView grow>
-          {person.name}
-        </FlexView>
-        <FlexView hAlignContent='right' onClick={onDeletePersonClick(person.name)}>
-          x
-        </FlexView>
-      </FlexView>
-      <FlexView className='items' column>
-        {person.items.map(this.templatePersonItem)}
-      </FlexView>
-    </FlexView>
-  )
-
-  getLocals({ order: { people }, onPersonClick, onDeletePersonClick }) {
+  getLocals({ order: { people = [] }, onPersonClick, onDeletePersonClick }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name
@@ -131,6 +109,29 @@ export default class Order extends React.Component {
       }
     };
   }
+
+  templatePersonItem = (item, key) => (
+    <FlexView key={key}>
+      {item}
+    </FlexView>
+  )
+
+  templatePerson = ({ onPersonClick, onDeletePersonClick }) => (person, key) => (
+    <FlexView key={key} column>
+      <FlexView onClick={onPersonClick(person.name)}>
+        <FlexView grow>
+          {person.name}
+        </FlexView>
+        <FlexView hAlignContent='right' onClick={onDeletePersonClick(person.name)}>
+          x
+        </FlexView>
+      </FlexView>
+      <FlexView className='items' column>
+        {person.items.map(this.templatePersonItem)}
+      </FlexView>
+    </FlexView>
+  )
+
 
   template({
     orderDetailsProps,
