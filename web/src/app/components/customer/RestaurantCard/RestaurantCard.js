@@ -16,15 +16,15 @@ import './img/time-icon.png';
 })
 export default class RestaurantCard extends React.Component {
 
-  getLocals({ restaurant: { name, address, imgURL }, onClick }) {
+  getLocals({ restaurant: { name, address, imgUrl }, onClick }) {
     // const [timeStart, timeEnd] = timeSlot;
-    return { name, address, imgURL, onClick };
+    return { name, address, imgUrl, onClick };
   }
 
-  template({ name, imgURL, address, onClick }) {
+  template({ name, imgUrl, address, onClick }) {
     return (
       <FlexView column className='restaurant-card' onClick={onClick}>
-        <div className='card-image' style={{ backgroundImage: `url(${imgURL})` }} />
+        <div className='card-image' style={{ backgroundImage: `url(${imgUrl})` }} />
         <div className='description'>
           <div className='description-container'>
             <p className='name'>{name}</p>
