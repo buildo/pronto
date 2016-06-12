@@ -5,7 +5,8 @@ import * as commands from '../app/commands';
 import routes from '../app/routes/restaurant';
 
 const initialState = {
-  token: localStorage.getItem('token') || null
+  token: localStorage.getItem('token') || null,
+  restaurantId: '1' // TODO(gio) remove
 };
 
 import {

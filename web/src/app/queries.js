@@ -31,10 +31,9 @@ export const restaurantProfile = Query({
 export const menu = Query({
   id: 'menu',
   dependencies: {
-    restaurant: {
-      query: restaurant
-    }
+    restaurant: { query: restaurant }
   },
+  params: { restaurant: Restaurant },
   returnType: Menu,
   fetch: ({ restaurant }) => Promise.resolve(restaurant.menu)
 });

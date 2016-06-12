@@ -46,6 +46,7 @@ export const isRestaurantOpen = rid => PAPI.get(`restaurants/${rid}/open`);
 export const openRestaurant = rid => PAPI.patch(`restaurants/${rid}`, { open: true });
 export const closeRestaurant = rid => PAPI.patch(`restaurants/${rid}`, { open: false });
 export const updateRestaurant = (rid, patch) => PAPI.patch(`restaurants/${rid}`, patch);
+export const updateMenu = (rid, value) => PAPI.put(`restaurants/${rid}/menu`, value);
 
 export const getMenu = (rid) => {
   return PAPI.get(`restaurant/${rid}/menu`);
