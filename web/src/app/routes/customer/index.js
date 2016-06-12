@@ -9,13 +9,11 @@ import CreateOrder from './CreateOrderHandler';
 
 export default (
   <Route path='/' handler={App}>
-    <Route name='restaurants'>
-      <Route name='restaurant' path='/restaurants/:restaurantId/?' handler={Restaurant}>
-        <Route name='order' path=':orderId/?' handler={Order} />
-        <Route name='personOrder' path=':orderId/:personId/?' handler={PersonOrder} />
-        <DefaultRoute handler={CreateOrder} />
-      </Route>
-      <DefaultRoute  handler={Restaurants} />
+    <Route name='restaurants' path='restaurants/?' handler={Restaurants} />
+    <Route name='restaurant' path='restaurants/:restaurantId/?' handler={Restaurant}>
+      <Route name='order' path=':orderId/?' handler={Order} />
+      <Route name='personOrder' path=':orderId/:personId/?' handler={PersonOrder} />
+      <DefaultRoute handler={CreateOrder} />
     </Route>
   </Route>
 );
