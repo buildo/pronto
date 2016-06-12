@@ -1,23 +1,26 @@
 import React from 'react';
 import { RouteHandler } from 'react-router';
-import { FlexView as View } from 'Basic';
+import Page, { Header, Content, Footer } from 'customer/Page';
 import RightSidebar from 'customer/RightSidebar';
 import Menu from 'customer/Menu';
+
+console.log({ Page });
 
 export default class RestaurantHandler extends React.Component {
   render() {
     return (
-      <View column>
-        <div>
+      <Page>
+        <Header>
           Header goes here...
-        </div>
-        <View>
+        </Header>
+        <Content>
           <Menu />
           <RightSidebar>
             <RouteHandler />
           </RightSidebar>
-        </View>
-      </View>
+        </Content>
+        <Footer />
+      </Page>
     );
   }
 }

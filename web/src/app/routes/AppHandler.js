@@ -5,9 +5,7 @@ export default class AppHandler extends React.Component {
 
   render() {
     return (
-      <div>
-        <RouteHandler />
-      </div>
+      <RouteHandler />
     );
   }
 
