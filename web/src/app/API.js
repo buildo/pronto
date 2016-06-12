@@ -53,12 +53,16 @@ export const openRestaurant = rid => PAPI.patch(`restaurants/${rid}`, { open: tr
 export const closeRestaurant = rid => PAPI.patch(`restaurants/${rid}`, { open: false });
 export const updateRestaurant = (rid, patch) => PAPI.patch(`restaurants/${rid}`, patch);
 export const updateMenu = (rid, value) => PAPI.put(`restaurants/${rid}/menu`, value);
-export const getRestaurantOrders = rid => PAPI.get(`orders/${rid}`)
-  .then(ordersMap => Object.keys(ordersMap).map(k => ({
-    ...ordersMap[k], id: k
-  })));
+const toListWith = key => map => Object.keys(map).map(k => ({
+  ...map[k], [key]: k
+}));
+const toListWithId = toListWith('id');
+const toListWithName = toListWith('name');
+export const getRestaurantOrders = rid => PAPI.get(`orders/${rid}`).then(toListWithId);
 export const getRestaurantOrder = (rid, oid) => PAPI.get(`orders/${rid}/${oid}`).then(order => ({
-  ...order, id: oid
+  ...order,
+  peopleOrders: toListWithName(order.peopleOrders || {}),
+  id: oid
 }));
 
 export const getMenu = (rid) => {
