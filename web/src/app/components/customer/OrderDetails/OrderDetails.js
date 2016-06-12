@@ -64,12 +64,17 @@ export default class OrderDetails extends React.Component {
         </FlexView>
       </FlexView>
       <FlexView column className='order-content'>
-        {items.map(item => (
+        {items.length > 0 && items.map(item => (
           <FlexView key={item} vAlignContent='center'>
             <div className='rectangle' />
             {item}
           </FlexView>
         ))}
+        {items.length === 0 && (
+          <div>
+            Il tuo ordine è vuoto, scegli dei piatti dal menu!
+          </div>
+        )}
       </FlexView>
     </FlexView>
   )
