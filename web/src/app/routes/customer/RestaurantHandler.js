@@ -1,8 +1,6 @@
 import React from 'react';
-import { RouteHandler } from 'react-router';
-import Page, { Content, Footer } from 'customer/Page';
-import RightSidebar from 'customer/RightSidebar';
-import Menu from 'customer/Menu';
+import Page, { Footer } from 'customer/Page';
+import Restaurant from 'customer/Restaurant';
 import RestaurantHeader from 'customer/RestaurantHeader';
 
 export default class RestaurantHandler extends React.Component {
@@ -10,12 +8,7 @@ export default class RestaurantHandler extends React.Component {
     return (
       <Page>
         <RestaurantHeader />
-        <Content>
-          <Menu />
-          <RightSidebar>
-            <RouteHandler />
-          </RightSidebar>
-        </Content>
+        <Restaurant />
         <Footer />
       </Page>
     );
