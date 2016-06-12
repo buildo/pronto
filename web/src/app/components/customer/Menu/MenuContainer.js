@@ -13,6 +13,6 @@ export default container(Menu, {
     isStatic: !personId,
     value: personItems,
     onChange: personItems => transition({ personItems }),
-    hide: maybeOrder && maybeOrder.status === OrderStatus('submitted')
+    hide: maybeOrder && maybeOrder.status === OrderStatus('submitted') || false
   })
 });
