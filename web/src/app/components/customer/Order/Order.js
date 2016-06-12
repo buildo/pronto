@@ -4,7 +4,9 @@ import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
 import { FlexView } from 'Basic';
 import { Order as OrderType } from 'model';
+import Modal from 'buildo-react-components/src/modal/Modal';
 
+import './order.scss';
 
 @skinnable()
 @props({
@@ -15,6 +17,16 @@ import { Order as OrderType } from 'model';
   onConfirmOrder: t.Function
 })
 export default class Order extends React.Component {
+
+  initialState = {
+    showConfirmModal: false,
+    customerPhoneNumber: null,
+    tableName: null
+  }
+
+  state = {
+    ...this.initialState
+  }
 
   onAddPersonClick = () => {
     const personId = window.prompt('Inserisci il nome della persona');
@@ -61,15 +73,45 @@ export default class Order extends React.Component {
   )
 
   getLocals({ order, onPersonClick }) {
+    const { showConfirmModal, customerPhoneNumber, tableName } = this.state;
+
     return {
       order,
-      onAddPersonClick: this.onAddPersonClick,
       onPersonClick,
-      onDeletePersonClick: this.onDeletePersonClick
+      showConfirmModal,
+      onAddPersonClick: this.onAddPersonClick,
+      onDeletePersonClick: this.onDeletePersonClick,
+      onConfirmOrder: this.onConfirmOrder,
+      openModal: this.openModal,
+      modalProps: {
+        className: 'confirm-order-modal',
+        transitionLeaveTimeout: 0,
+        transitionEnterTimeout: 0,
+        dismissOnClickOutside: true,
+        iconClose: <i className='fa fa-close' />,
+        onDismiss: this.closeModal,
+        title: 'Riepilogo del tuo ordine',
+        tableInputProps: {
+          value: tableName,
+          onChange: ({ target: { value: tableName } }) => (
+            this.setState({ tableName })
+          )
+        },
+        telephoneInputProps: {
+          value: customerPhoneNumber,
+          onChange: ({ target: { value: customerPhoneNumber } }) => (
+            this.setState({ customerPhoneNumber })
+          )
+        }
+      }
     };
   }
 
-  template({ order, onPersonClick, onDeletePersonClick, onAddPersonClick }) {
+  template({
+    order, onPersonClick, onDeletePersonClick,
+    onAddPersonClick, onConfirmOrder, openModal, showConfirmModal,
+    modalProps: { tableInputProps, telephoneInputProps, ...modalProps }
+  }) {
     return (
       <FlexView className='order' column>
         <FlexView className='people' column>
@@ -78,7 +120,26 @@ export default class Order extends React.Component {
         <button onClick={onAddPersonClick}>
           Add person
         </button>
-
+        <button onClick={openModal}>
+          Conferma il tuo ordine
+        </button>
+        {showConfirmModal && (
+          <Modal {...modalProps}>
+            <FlexView column>
+              <h1>
+                Inserisci il nome del tuo tavolo!
+              </h1>
+              <input {...tableInputProps} />
+              <p>
+                Inserisci il tuo numero di telefono
+              </p>
+              <input {...telephoneInputProps} />
+              <button onClick={onConfirmOrder}>
+                CONFERMA
+              </button>
+            </FlexView>
+          </Modal>
+        )}
       </FlexView>
     );
   }
