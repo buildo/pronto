@@ -62,7 +62,7 @@ export default class Order extends React.Component {
 
   closeNameModal = () => this.setState({ ...this.initialState, showNameModal: false })
 
-  getLocals({ order: { people = [] }, onPersonClick, onDeletePersonClick }) {
+  getLocals({ order: { peopleOrders: people }, onPersonClick, onDeletePersonClick }) {
     const {
       showConfirmModal, customerPhoneNumber, tableName,
       showNameModal, name

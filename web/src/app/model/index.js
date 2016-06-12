@@ -32,7 +32,7 @@ export const Order = t.refinement(t.interface({
   status: OrderStatus,
   peopleOrders: t.list(Person)
 }, { strict: true }), order => {
-  return order.status === OrderStatus('pending') || order.people.length > 0;
+  return order.status === OrderStatus('pending') || order.peopleOrders.length > 0;
 }, 'Order');
 
 export const SubmittedOrder = t.refinement(Order, order => {
