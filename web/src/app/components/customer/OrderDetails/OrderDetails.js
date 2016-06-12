@@ -37,14 +37,14 @@ export default class OrderDetails extends React.Component {
     this.setState({ ...this.initialState });
   }
 
-  getLocals({ people, onEditPerson }) {
+  getLocals({ people, onEditPerson, onDeletePerson }) {
     const { showConfirmModal, personNameToDelete } = this.state;
 
     return {
       people,
       onEditPerson,
       showConfirmModal,
-      onDeletePerson: this.onDeletePerson,
+      onDeletePerson: onDeletePerson ? this.onDeletePerson : undefined,
       openConfirmModal: this.openConfirmModal,
       modalProps: showConfirmModal && {
         onDismiss: this.closeConfirmModal,
