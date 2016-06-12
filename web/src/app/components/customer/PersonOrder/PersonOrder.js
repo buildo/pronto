@@ -15,11 +15,12 @@ import OrderDetails from 'customer/OrderDetails';
 export default class PersonOrder extends React.Component {
 
   getLocals({ personItems, personId, onCancel, onConfirm }) {
+    const person = personId && { name: personId, items: personItems };
     return {
       onCancel,
-      onConfirm,
+      onConfirm: personItems.length ? onConfirm : undefined,
       orderDetailsProps: {
-        people: [{ name: personId, items: personItems }]
+        people: person ? [person] : []
       }
     };
   }
