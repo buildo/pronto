@@ -12,7 +12,7 @@ const plugins = [
   // cause failed production builds to fail faster
   new webpack.NoErrorsPlugin(),
   new HtmlWebpackPlugin(WebpackUtil.getHtmlPluginConfig(config, true)),
-  new ExtractTextPlugin('style', '/style.[hash].min.css')
+  new ExtractTextPlugin('style', 'style.[hash].min.css')
 ];
 
 if (config.gzip) {
