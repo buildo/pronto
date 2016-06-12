@@ -5,10 +5,8 @@ import './content.scss';
 
 export default class Content extends React.Component {
   render = () => (
-    <FlexView className='content' grow hAlignContent='center'>
-      <FlexView basis={890} shrink>
-        {this.props.children}
-      </FlexView>
+    <FlexView className='content' width='100%' hAlignContent='center'>
+      {this.props.children}
     </FlexView>
   )
 }
