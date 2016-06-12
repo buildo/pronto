@@ -63,7 +63,12 @@ export const updateRestaurantProfile = Command({
 export const doConfirmOrder = Command({
   id: 'doConfirmOrder',
   invalidates: {},
-  params: { restaurantId: t.String, orderId: t.String },
+  params: {
+    restaurantId: t.String,
+    orderId: t.String,
+    customerPhoneNumber: t.String,
+    tableName: t.String
+  },
   run: ({ restaurantId: rId, orderId: oId, customerPhoneNumber, tableName }) => (
     patchOrder(rId, oId, { customerPhoneNumber, tableName, status: 'submitted' })
   )

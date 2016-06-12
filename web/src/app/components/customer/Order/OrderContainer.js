@@ -12,6 +12,6 @@ export default container(Order, {
       transition({ view: 'personOrder', personId });
     },
     onDeletePersonClick: (personId) => doDeletePersonFromOrder(personId),
-    onConfirmOrder: () => doConfirmOrder()
+    onConfirmOrder: doConfirmOrder
   })
 });
