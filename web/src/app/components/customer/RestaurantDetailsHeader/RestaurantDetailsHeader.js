@@ -15,16 +15,16 @@ import './img/time-icon.png';
 })
 export default class RestaurantDetailsHeader extends React.Component {
 
-  getLocals({ restaurant: { name, address } }) {
-    return { name, address };
+  getLocals({ restaurant: { address, telephone } }) {
+    return { address, telephone };
   }
 
-  template({ address, phoneNumber }) {
+  template({ address, telephone }) {
     return (
       <FlexView className='restaurant-details-header' hAlignContent='center' vAlignContent='center'>
         <FlexView className='detail'>
           <i className='phone-icon'></i>
-          <p className='address'>TELEFONO: {phoneNumber}</p>
+          <p className='address'>TELEFONO: {telephone}</p>
         </FlexView>
         <FlexView className='detail'>
           <i className='location-icon'></i>
