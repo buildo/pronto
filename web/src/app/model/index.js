@@ -25,8 +25,8 @@ export const Person = t.interface({
 export const OrderStatus = t.enums.of(['submitted', 'pending'], 'OrderStatus');
 
 export const Order = t.refinement(t.interface({
-  // id: t.String, // client session id
-  createdAt: t.maybe(t.Number),
+  id: t.String, // client session id
+  createdAt: t.maybe(t.Number), // TODO(gio): add a s required in submitted order
   customerPhoneNumber: t.maybe(t.String),
   tableName: t.maybe(t.String),
   status: OrderStatus,

@@ -38,17 +38,13 @@ export const menu = Query({
   fetch: ({ restaurant }) => Promise.resolve(restaurant.menu)
 });
 
-export const orders = Query({
-  id: 'orders',
+export const restaurantOrders = Query({
+  id: 'restaurantOrders',
+  params: { restaurantId: t.String },
   returnType: t.list(SubmittedOrder),
-  fetch: () => Promise.resolve([{
-    id: 'xxx',
-    status: 'submitted',
-    referencePhoneNumber: '3333599780',
-    people: [{
-      name: 'gio', items: []
-    }]
-  }].map(SubmittedOrder))
+  fetch: ({ restaurantId }) => API.getRestaurantOrders(restaurantId).then(
+    orders => orders.filter(SubmittedOrder.is)
+  )
 });
 
 export const order = Query({

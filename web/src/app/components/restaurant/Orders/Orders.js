@@ -6,17 +6,18 @@ import { SubmittedOrder } from 'model';
 @skinnable()
 @pure
 @props({
-  orders: t.list(SubmittedOrder)
+  restaurantOrders: t.list(SubmittedOrder)
 })
 export default class Orders extends React.Component {
-  templateOrder = order => (
+
+  templateOrder = (order) => (
     <div key={order.id}>{order.id} ({order.peopleOrders.length} people)</div>
   );
 
-  template({ orders }) {
+  template({ restaurantOrders }) {
     return (
       <div>
-        {orders.map(this.templateOrder)}
+        {restaurantOrders.map(this.templateOrder)}
       </div>
     );
   }

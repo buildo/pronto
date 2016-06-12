@@ -3,5 +3,5 @@ import Orders from './Orders';
 import container from 'container';
 
 export default container(Orders, {
-  queries: ['orders']
-}, pick(['orders']));
+  queries: ['restaurantOrders']
+}, pick(['restaurantOrders']));
