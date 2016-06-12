@@ -12,7 +12,8 @@ export const user = Query({
 export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
-  fetch: () => API.getRestaurants().filter(Restaurant.is)
+  fetch: () => API.getRestaurants()
+    .then(restaurants => restaurants.filter(r => r && Restaurant.is(r)))
 });
 
 export const restaurant = Query({
