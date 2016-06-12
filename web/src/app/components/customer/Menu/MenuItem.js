@@ -8,6 +8,7 @@ import FlexView from 'FlexView';
 @skinnable()
 @props({
   name: t.String,
+  shortName: t.String,
   price: t.maybe(t.Number),
   description: t.maybe(t.String),
   selected: t.maybe(t.Boolean),

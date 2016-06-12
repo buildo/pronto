@@ -10,7 +10,7 @@ import MenuItem from './MenuItem';
 @pure
 @skinnable()
 @props({
-  name: t.String,
+  description: t.String,
   items: t.list(MenuItemModel),
   personItems: t.maybe(t.list(t.String)),
   onChange: t.maybe(t.Function)
@@ -34,11 +34,11 @@ export default class MenuGroup extends React.Component {
   getLocals() {
     const {
       toggleMenuItem,
-      props: { name, items, personItems, onChange }
+      props: { description, items, personItems, onChange }
     } = this;
 
     return {
-      name,
+      description,
       personItems,
       toggleMenuItem: onChange ? toggleMenuItem : undefined,
       menuItems: items
@@ -54,10 +54,10 @@ export default class MenuGroup extends React.Component {
     />
   ))
 
-  template({ name, ...locals }) {
+  template({ description, ...locals }) {
     return (
       <FlexView className='menu-group' column>
-        <div className='group-name'>{name}</div>
+        <div className='group-name'>{description}</div>
         <FlexView className='menu-items' column>
           {this.templateMenuItems(locals)}
         </FlexView>
