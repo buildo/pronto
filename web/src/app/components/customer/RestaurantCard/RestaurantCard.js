@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { props, t } from 'tcomb-react';
 import { pure, skinnable } from 'revenge';
 import { Restaurant } from 'model';
@@ -16,14 +17,29 @@ import './img/time-icon.png';
 })
 export default class RestaurantCard extends React.Component {
 
-  getLocals({ restaurant: { name, address, imgUrl }, onClick }) {
-    // const [timeStart, timeEnd] = timeSlot;
-    return { name, address, imgUrl, onClick };
+  getLocals({ restaurant: { name, address, imgUrl, open }, onClick }) {
+    return {
+      name,
+      address,
+      imgUrl,
+      open,
+      onClick: open ? onClick : undefined,
+      className: cx('restaurant-card', { 'is-disabled': !open })
+    };
   }
 
-  template({ name, imgUrl, address, onClick }) {
+  template({ name, imgUrl, address, onClick, className, open }) {
     return (
-      <FlexView column className='restaurant-card' onClick={onClick}>
+      <FlexView column className={className} onClick={onClick}>
+        {!open && (
+          <FlexView
+            className='card-closed'
+            hAlignContent='center'
+            vAlignContent='center'
+          >
+            CHIUSO
+          </FlexView>
+       )}
         <div className='card-image' style={{ backgroundImage: `url(${imgUrl})` }} />
         <div className='description'>
           <div className='description-container'>

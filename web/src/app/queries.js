@@ -13,7 +13,7 @@ export const restaurants = Query({
   id: 'restaurants',
   returnType: t.list(Restaurant),
   fetch: () => API.getRestaurants()
-    .then(restaurants => restaurants.filter(r => r && Restaurant.is(r)))
+    .then(restaurants => restaurants.filter(r => r && r.menu && Restaurant.is(r)))
 });
 
 export const restaurant = Query({

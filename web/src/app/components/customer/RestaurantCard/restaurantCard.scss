@@ -12,7 +12,17 @@ $borderRadius: 4px;
   border-radius: $borderRadius;
   background-color: #e6eaee;
   transition: transform 0.1s ease;
+  position: relative;
 
+  .card-closed {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background: rgba(white, 0.6);
+    font-size: 25px;
+    color: red;
+    cursor: not-allowed;
+    z-index: 10;
+  }
 
   // reset
   p, img, div {
@@ -21,7 +31,7 @@ $borderRadius: 4px;
     margin: 0;
   }
 
-  &:hover {
+  &:not(.is-disabled):hover {
     box-shadow: 0px 7px 20px 0px rgba(1,1,1,0.2);
     transform: scale(1.05);
   }
