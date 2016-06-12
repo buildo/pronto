@@ -1,7 +1,7 @@
 import { Query } from 'avenger';
 import t from 'tcomb';
 import * as API from 'API';
-import { Menu, Order, Restaurant, SubmittedOrder } from 'model';
+import { Menu, Order, Restaurant, PendingRestaurant, SubmittedOrder } from 'model';
 
 export const user = Query({
   id: 'user',
@@ -23,10 +23,11 @@ export const restaurant = Query({
   fetch: ({ restaurantId }) => API.getRestaurant(restaurantId)
 });
 
-export const restaurantProfile = Query({
-  id: 'restaurantProfile',
-  returnType: t.Object, // TODO change
-  fetch: (/* { restaurantId }*/) => API.getRestaurant(0)
+export const possiblyPendingRestaurant = Query({
+  id: 'possiblyPendingRestaurant',
+  params: { restaurantId: t.String },
+  returnType: PendingRestaurant,
+  fetch: ({ restaurantId }) => API.getRestaurant(restaurantId)
 });
 
 export const menu = Query({
@@ -35,8 +36,18 @@ export const menu = Query({
     restaurant: { query: restaurant }
   },
   params: { restaurant: Restaurant },
-  returnType: Menu,
-  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu) // TODO(gio): handle missing menu here
+  returnType: t.maybe(Menu),
+  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu)
+});
+
+export const possiblyEmptyMenu = Query({
+  id: 'possiblyEmptyMenu',
+  dependencies: {
+    restaurant: { query: restaurant }
+  },
+  params: { restaurant: PendingRestaurant },
+  returnType: t.maybe(Menu),
+  fetch: ({ restaurant }) => Promise.resolve(restaurant.menu || null)
 });
 
 export const restaurantOrders = Query({

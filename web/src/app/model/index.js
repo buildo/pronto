@@ -48,6 +48,9 @@ export const Restaurant = t.interface({
   // account: FirebasAccount,
   open: t.Boolean, // on/off
   maxPeopleNumber: t.Integer,
-  imgUrl: t.maybe(t.String)//,
-  // orders: t.list(SubmittedOrder)
+  imgUrl: t.String
 }, { name: 'Restaurant', strict: true });
+
+export const PendingRestaurant = t.refinement(t.interface({
+  open: t.Boolean
+}), r => r.open === false);

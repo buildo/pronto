@@ -1,6 +1,6 @@
 import { Command } from 'avenger';
 import t from 'tcomb';
-import { user, open, restaurantProfile, menu, order } from 'queries';
+import { user, open, menu, order, restaurant } from 'queries';
 import * as API from 'API';
 import { Menu } from 'model';
 
@@ -83,7 +83,7 @@ export const doRefreshOpen = Command({
 
 export const updateRestaurantProfile = Command({
   id: 'updateRestaurantProfile',
-  invalidates: { restaurantProfile },
+  invalidates: { restaurant },
   params: {
     restaurantId: t.String,
     profile: t.Object

@@ -2,6 +2,7 @@ import React from 'react';
 import { skinnable, pure } from 'revenge';
 import { t, props } from 'tcomb-react';
 import { FlexView as View, Button } from 'Basic';
+import { PendingRestaurant } from 'model';
 import isEqual from 'lodash/isEqual';
 
 const inputStyle = { marginTop: 5, marginBottom: 5, padding: 5 };
@@ -15,13 +16,13 @@ const InputField = ({ type, value, placeholder, onChange }) => (
 @skinnable()
 @pure
 @props({
-  restaurantProfile: t.Object,
+  possiblyPendingRestaurant: PendingRestaurant,
   updateRestaurantProfile: t.Function
 })
 export default class Profile extends React.Component {
 
   state = {
-    ...this.props.restaurantProfile
+    ...this.props.possiblyPendingRestaurant
   }
 
   onChange = (key) => ({ target: { value } }) => {
@@ -29,24 +30,24 @@ export default class Profile extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.restaurantProfile !== props.restaurantProfile) {
-      this.setState(props.restaurantProfile);
+    if (this.props.possiblyPendingRestaurant !== props.possiblyPendingRestaurant) {
+      this.setState(props.possiblyPendingRestaurant);
     }
   }
 
   getLocals({ updateRestaurantProfile }) {
     return {
       updateRestaurantProfile,
-      restaurantProfile: this.state,
-      saveEnabled: !isEqual(this.state, this.props.restaurantProfile)
+      restaurant: this.state,
+      saveEnabled: !isEqual(this.state, this.props.possiblyPendingRestaurant)
     };
   }
 
   template({
     updateRestaurantProfile,
-    restaurantProfile,
+    restaurant,
     saveEnabled,
-    restaurantProfile: {
+    restaurant: {
       name,
       description,
       telephone,
@@ -101,7 +102,7 @@ export default class Profile extends React.Component {
           <Button
             label='Save'
             baseState={saveEnabled ? 'ready' : 'not-allowed'}
-            onClick={() => updateRestaurantProfile({ profile: restaurantProfile })}
+            onClick={() => updateRestaurantProfile({ profile: restaurant })}
             style={{ width: 200 }}
           />
         </View>
