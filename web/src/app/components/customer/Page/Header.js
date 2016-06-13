@@ -24,7 +24,7 @@ export default class Header extends React.Component {
             hAlignContent='left'
             vAlignContent='top'
           >
-            <span className='logo' />
+            <a className='logo' href='/' />
           </FlexView>
           <FlexView
             className='header-container'

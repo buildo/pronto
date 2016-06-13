@@ -6,12 +6,13 @@ $borderRadius: 4px;
 .restaurant-card {
   margin: 10px;
   cursor: pointer;
-  height: $height;
+  height: $height + 2px;
   min-width: $width;
   max-width: 400px;
   border-radius: $borderRadius;
   background-color: #e6eaee;
   transition: transform 0.1s ease;
+  border: 1px solid rgba(1,1,1,0.07);
 
 
   // reset
@@ -22,14 +23,15 @@ $borderRadius: 4px;
   }
 
   &:hover {
-    box-shadow: 0px 7px 20px 0px rgba(1,1,1,0.2);
+    box-shadow: 0px 7px 20px 0px rgba(black, 0.3);
     transform: scale(1.05);
   }
 
   .card-image {
     height: $imgHeight;
     height: 152px;
-    width: 100%;
+    width: calc(100% + 2px);
+    margin-left: -1px;
     background-size: cover;
     border-top-left-radius: $borderRadius;
     border-top-right-radius: $borderRadius;
