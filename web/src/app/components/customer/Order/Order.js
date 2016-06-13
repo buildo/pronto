@@ -176,9 +176,9 @@ export default class Order extends React.Component {
               readOnly
               wrapper={{ className: 'copy-input' }}
             >
-              <a style={{ margin: '0 5px', pointerEvents: 'none' }}>
-                {clipboardProps.inputValue}
-              </a>
+              <FlexView style={{ height: 36 }} vAlignContent='center'>
+                <a>{clipboardProps.inputValue}</a>
+              </FlexView>
             </InputChildren>
           </CopyToClipboard>
         )}
