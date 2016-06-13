@@ -2,12 +2,20 @@
 
 .modal {
 
+  i.fa.fa-close {
+    color: rgb(245, 246, 247);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
   .modal-content {
     position: relative;
     width: 500px;
-    height: 400px;
     padding: 30px;
     background: $lightgray;
+    border-radius: 4px;
 
     .modal-title {
       font-size: 22px;
@@ -23,6 +31,7 @@
     button {
       display: inline-block;
       margin: 0 auto;
+      margin-top: 10px;
     }
 
     h1 {
