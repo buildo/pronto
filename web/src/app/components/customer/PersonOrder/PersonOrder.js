@@ -7,6 +7,7 @@ import OrderDetails from 'customer/OrderDetails';
 
 @skinnable()
 @props({
+  initPersonItems: t.Function,
   personItems: t.list(t.String),
   personId: t.maybe(t.String),
   onCancel: t.Function,
@@ -14,6 +15,10 @@ import OrderDetails from 'customer/OrderDetails';
   refresh: t.Function
 })
 export default class PersonOrder extends React.Component {
+
+  componentWillMount() {
+    this.props.initPersonItems();
+  }
 
   getLocals({ personItems, personId, onCancel, onConfirm, refresh }) {
     const person = personId && { name: personId, items: personItems };
