@@ -21,7 +21,7 @@ export default class Item extends React.Component {
     };
   }
 
-  template({ item: { shortName, name }, onChange }) {
+  template({ item: { shortName, name, price, description }, onChange }) {
     return (
       <View column grow className='item'>
         <View grow style={inputStyle}>
@@ -36,6 +36,21 @@ export default class Item extends React.Component {
             value={name}
             onChange={onChange('name')}
             placeholder='Item Name'
+          />
+        </View>
+        <View grow style={inputStyle}>
+          <input
+            value={description}
+            onChange={onChange('description')}
+            placeholder='Item Description'
+          />
+        </View>
+        <View grow style={inputStyle}>
+          <input
+            type='number'
+            value={price}
+            onChange={onChange('price')}
+            placeholder='Price (optional)'
           />
         </View>
       </View>
