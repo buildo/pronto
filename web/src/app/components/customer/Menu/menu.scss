@@ -46,7 +46,6 @@
 
         .menu-item {
           width: 100%;
-          cursor: pointer;
           margin-top: 10px;
           padding: 11.5px 0;
           border-top: 1px solid #DDDEDF;
@@ -79,4 +78,8 @@
       }
     }
   }
+}
+
+.composable-menu .menu-item {
+  cursor: pointer;
 }

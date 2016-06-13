@@ -86,7 +86,7 @@ export default class OrderDetails extends React.Component {
   )
 
   template({
-    people, onEditPerson, onDeletePerson,
+    people, onEditPerson, onDeletePerson, showControls,
     showConfirmModal, modalProps, openConfirmModal
   }) {
     return (
@@ -94,6 +94,7 @@ export default class OrderDetails extends React.Component {
         {people.map(person => (
           this.templatePerson({
             ...person,
+            showControls,
             onEditPerson,
             onDeletePerson: onDeletePerson && openConfirmModal
           })

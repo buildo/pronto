@@ -44,7 +44,7 @@ export default class Order extends React.Component {
 
     const trimmedName = name && name.trim();
     if (trimmedName) {
-      this.props.onAddPersonClick(trimmedName);
+      this.props.onAddPersonClick(trimmedName.toLowerCase());
     }
   }
 
@@ -99,7 +99,7 @@ export default class Order extends React.Component {
       },
       onAddPersonClick: people.length < maxPeopleNumber ? this.onAddPersonClick : undefined,
       onConfirmOrder: this.onConfirmOrder,
-      openConfirmModal: this.openConfirmModal,
+      openConfirmModal: people.length > 0 && this.openConfirmModal,
       openNameModal: people.length < maxPeopleNumber ? this.openNameModal : undefined,
       modalConfirmProps: {
         className: 'confirm-order-modal',
@@ -164,7 +164,10 @@ export default class Order extends React.Component {
           </button>
         }
         {!orderSubmitted &&
-          <button className='primary' onClick={openConfirmModal}>
+          <button
+            className={cx('primary', { 'is-disabled': !openConfirmModal })}
+            onClick={openConfirmModal}
+          >
             Invia ordine
           </button>
         }
