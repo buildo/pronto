@@ -15,20 +15,25 @@ import './img/time-icon.png';
 })
 export default class RestaurantDetailsHeader extends React.Component {
 
-  getLocals({ restaurant: { address, telephone } }) {
-    return { address, telephone };
+  getLocals({ restaurant: { address, telephone, imgUrl } }) {
+    return { address, telephone, imgUrl };
   }
 
-  template({ address, telephone }) {
+  template({ address, telephone, imgUrl }) {
     return (
-      <FlexView className='restaurant-details-header' hAlignContent='center' vAlignContent='center'>
-        <FlexView className='detail'>
-          <i className='phone-icon'></i>
-          <p className='address'>TELEFONO: {telephone}</p>
-        </FlexView>
-        <FlexView className='detail'>
-          <i className='location-icon'></i>
-          <p className='address'>INDIRIZZO: {address}</p>
+      <FlexView className='restaurant-details-header'>
+        <div className='blurred-overlay'>
+          <div style={{ backgroundImage: `url(${imgUrl})` }} />
+        </div>
+        <FlexView className='details-wrapper' hAlignContent='center' vAlignContent='center'>
+          <FlexView className='detail'>
+            <i className='phone-icon'></i>
+            <p className='address'>TELEFONO: {telephone}</p>
+          </FlexView>
+          <FlexView className='detail'>
+            <i className='location-icon'></i>
+            <p className='address'>INDIRIZZO: {address}</p>
+          </FlexView>
         </FlexView>
         {/*<FlexView className='detail'>
           <i className='time-icon'></i>

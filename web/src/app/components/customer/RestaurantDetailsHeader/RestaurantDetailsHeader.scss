@@ -4,54 +4,84 @@ $imgHeight: 152px;
 $borderRadius: 4px;
 
 .restaurant-details-header {
-  // reset
-  p, img, div {
-    padding: 0;
-    border: 0;
-    margin: 0;
-  }
+  position: relative;
   height: 57px;
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.56);
   margin-top: -57px;
   z-index: 2;
   width: 100%;
-  .detail {
-    margin: 0 10px;
-    font-size: 12px;
-    i.phone-icon {
-      background: url('phone-icon.png');
-      margin: 1px 0;
-      width: 13px;
-      height: 13px;
-      background-size: 100%;
+
+  .blurred-overlay {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    > div {
+      -webkit-filter: blur(9px);
+      filter: blur(9px);
+      position: absolute;
+      width: 100%;
+      height: 372px;
+      top: -372px + 57px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position-y: center;
     }
-    i.location-icon {
-      background: url('location-icon.png');
-      margin: 1px 0;
-      width: 10.5px;
-      height: 13px;
-      background-size: 100%;
+  }
+
+  .details-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    // reset
+    p, img, div {
+      padding: 0;
+      border: 0;
+      margin: 0;
     }
-    .address {
-      vertical-align: bottom;
-      margin-left: 4px;
-      line-height: 15px;
-    }
-    i.time-icon {
-      background: url('time-icon.png');
-      bottom: 0;
-      right: 86px;
-      margin: 1px 0;
-      width: 13px;
-      height: 13px;
-      background-size: 100%;
-    }
-    .time-slot {
-      text-align: right;
-      bottom: 0;
-      right: 0;
-      line-height: 15px;
+
+    .detail {
+      margin: 0 10px;
+      font-size: 12px;
+      i.phone-icon {
+        background: url('phone-icon.png');
+        margin: 1px 0;
+        width: 13px;
+        height: 13px;
+        background-size: 100%;
+      }
+      i.location-icon {
+        background: url('location-icon.png');
+        margin: 1px 0;
+        width: 10.5px;
+        height: 13px;
+        background-size: 100%;
+      }
+      .address {
+        vertical-align: bottom;
+        margin-left: 4px;
+        line-height: 15px;
+      }
+      i.time-icon {
+        background: url('time-icon.png');
+        bottom: 0;
+        right: 86px;
+        margin: 1px 0;
+        width: 13px;
+        height: 13px;
+        background-size: 100%;
+      }
+      .time-slot {
+        text-align: right;
+        bottom: 0;
+        right: 0;
+        line-height: 15px;
+      }
     }
   }
 }
