@@ -4,6 +4,7 @@ import { props } from 'tcomb-react';
 import { skinnable } from 'revenge';
 import { FlexView, Poll } from 'Basic';
 import OrderDetails from 'customer/OrderDetails';
+import { Sticky } from 'react-sticky';
 
 @skinnable()
 @props({
@@ -34,16 +35,18 @@ export default class PersonOrder extends React.Component {
 
   template({ orderDetailsProps, onCancel, onConfirm, refresh }) {
     return (
-      <FlexView className='order' grow column>
-        <Poll interval={3000} callback={refresh} />
-        <OrderDetails {...orderDetailsProps} />
-        <button onClick={onCancel}>
-          Annulla
-        </button>
-        <button className='primary' onClick={onConfirm}>
-          Aggiungi ordine
-        </button>
-      </FlexView>
+      <Sticky>
+        <FlexView className='order' grow column>
+          <Poll interval={3000} callback={refresh} />
+          <OrderDetails {...orderDetailsProps} />
+          <button onClick={onCancel}>
+            Annulla
+          </button>
+          <button className='primary' onClick={onConfirm}>
+            Aggiungi ordine
+          </button>
+        </FlexView>
+      </Sticky>
     );
   }
 }

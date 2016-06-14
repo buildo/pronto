@@ -9,6 +9,7 @@ import Modal from 'Modal';
 import OrderDetails from 'customer/OrderDetails';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import InputChildren from 'react-input-children';
+import { Sticky } from 'react-sticky';
 
 import './order.scss';
 import { orange } from 'theme/variables.scss';
@@ -148,72 +149,74 @@ export default class Order extends React.Component {
     refresh, orderSubmitted
   }) {
     return (
-      <FlexView className='order' grow column>
-        {!orderSubmitted && <Poll interval={3000} callback={refresh} />}
-        {orderSubmitted && (
-          <FlexView column>
-            <h1 style={{ color: orange }}>Ordine inviato!</h1>
-            <p>Presentati al ristorante quando vuoi</p>
-            <h3>Ecco il riepilogo del tuo ordine</h3>
-          </FlexView>
-        )}
-        <OrderDetails {...orderDetailsProps} />
-        {!orderSubmitted &&
-          <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
-            {!openNameModal ? 'Hai raggiunto il limite di persone' : 'Aggiungi persona'}
-          </button>
-        }
-        {!orderSubmitted &&
-          <button
-            className={cx('primary', { 'is-disabled': !openConfirmModal })}
-            onClick={openConfirmModal}
-          >
-            Invia ordine
-          </button>
-        }
-        {!orderSubmitted && <p>Invia il link a tutti quelli che vuoi invitare</p>}
-        {!orderSubmitted && (
-          <CopyToClipboard {...clipboardProps}>
-            <InputChildren
-              value={clipboardProps.text}
-              readOnly
-              wrapper={{ className: 'copy-input' }}
+      <Sticky bottomOffset={40}>
+        <FlexView className='order' grow column>
+          {!orderSubmitted && <Poll interval={3000} callback={refresh} />}
+          {orderSubmitted && (
+            <FlexView column>
+              <h1 style={{ color: orange }}>Ordine inviato!</h1>
+              <p>Presentati al ristorante quando vuoi</p>
+              <h3>Ecco il riepilogo del tuo ordine</h3>
+            </FlexView>
+          )}
+          <OrderDetails {...orderDetailsProps} />
+          {!orderSubmitted &&
+            <button className={cx({ 'is-disabled': !openNameModal })} onClick={openNameModal}>
+              {!openNameModal ? 'Hai raggiunto il limite di persone' : 'Aggiungi persona'}
+            </button>
+          }
+          {!orderSubmitted &&
+            <button
+              className={cx('primary', { 'is-disabled': !openConfirmModal })}
+              onClick={openConfirmModal}
             >
-              <FlexView style={{ height: 36 }} vAlignContent='center'>
-                <a>{clipboardProps.inputValue}</a>
+              Invia ordine
+            </button>
+          }
+          {!orderSubmitted && <p>Invia il link a tutti quelli che vuoi invitare</p>}
+          {!orderSubmitted && (
+            <CopyToClipboard {...clipboardProps}>
+              <InputChildren
+                value={clipboardProps.text}
+                readOnly
+                wrapper={{ className: 'copy-input' }}
+              >
+                <FlexView style={{ height: 36 }} vAlignContent='center'>
+                  <a>{clipboardProps.inputValue}</a>
+                </FlexView>
+              </InputChildren>
+            </CopyToClipboard>
+          )}
+          {!orderSubmitted && showConfirmModal && (
+            <Modal {...modalConfirmProps}>
+              <FlexView column>
+                <h1>
+                  Inserisci il nome del tuo tavolo!
+                </h1>
+                <input {...tableInputProps} />
+                <p>
+                  Inserisci il tuo numero di telefono
+                </p>
+                <input {...telephoneInputProps} />
+                <button onClick={onConfirmOrder}>
+                  CONFERMA
+                </button>
               </FlexView>
-            </InputChildren>
-          </CopyToClipboard>
-        )}
-        {!orderSubmitted && showConfirmModal && (
-          <Modal {...modalConfirmProps}>
-            <FlexView column>
-              <h1>
-                Inserisci il nome del tuo tavolo!
-              </h1>
-              <input {...tableInputProps} />
-              <p>
-                Inserisci il tuo numero di telefono
-              </p>
-              <input {...telephoneInputProps} />
-              <button onClick={onConfirmOrder}>
-                CONFERMA
-              </button>
-            </FlexView>
-          </Modal>
-        )}
-        {!orderSubmitted && showNameModal && (
-          <Modal {...modalNameProps}>
-            <FlexView column>
-              <p>Nome</p>
-              <input {...nameInputProps} />
-              <button onClick={onAddPersonClick}>
-                Prosegui
-              </button>
-            </FlexView>
-          </Modal>
-        )}
-      </FlexView>
+            </Modal>
+          )}
+          {!orderSubmitted && showNameModal && (
+            <Modal {...modalNameProps}>
+              <FlexView column>
+                <p>Nome</p>
+                <input {...nameInputProps} />
+                <button onClick={onAddPersonClick}>
+                  Prosegui
+                </button>
+              </FlexView>
+            </Modal>
+          )}
+        </FlexView>
+      </Sticky>
     );
   }
 }
