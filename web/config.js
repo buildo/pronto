@@ -17,4 +17,4 @@ const Config = t.struct({
 }, 'Config');
 
 const configJson = require('./config.json');
-module.exports = Config(configJson);
+module.exports = Config(configJson[process.env.NODE_ENV || 'development']);

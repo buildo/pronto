@@ -3,7 +3,9 @@
 
 # modify API_ENDPOINT in config.js to 'http://oxway-prod.elasticbeanstalk.com'
 
-npm run build
+npm run clean &&
+NODE_ENV=production npm run build-customer &&
+NODE_ENV=production npm run build-restaurant &&
 
 # deploy "customer" app
 aws s3 sync --acl public-read --content-encoding gzip --exclude '*' --include '*.gz' build/customer s3://pronto-customer

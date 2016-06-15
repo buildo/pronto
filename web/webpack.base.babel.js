@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import config from './config';
 import paths from './paths';
 
-const NODE_ENV = process.env.NODE_ENV || config.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const preLoaders = config.eslint ? [{
   test: /\.jsx?$/,
