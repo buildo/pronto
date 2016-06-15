@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+import 'isomorphic-fetch';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import t from 'tcomb';
@@ -85,4 +88,3 @@ export default function client({
     renderApp(mountNode, initialState, initialCache);
   };
 }
-
