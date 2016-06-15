@@ -1,0 +1,26 @@
+{
+  "development": {
+    "NODE_ENV": "development",
+    "hostname": "localhost",
+    "port": 9090,
+    "apiEndpoint": "http://localhost:8080",
+    "eslint": true,
+    "gzip": false,
+    "uglify": false,
+    "devTool": "source-map",
+    "title": "PRONTO",
+    "debug": "*"
+  },
+  "production": {
+    "NODE_ENV": "production",
+    "hostname": "localhost",
+    "port": 9090,
+    "apiEndpoint": "http://localhost:8080",
+    "eslint": true,
+    "gzip": true,
+    "uglify": true,
+    "devTool": "source-map",
+    "title": "PRONTO",
+    "debug": ""
+  }
+}
