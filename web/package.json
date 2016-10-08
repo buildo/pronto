@@ -62,7 +62,7 @@
   "dependencies": {
     "avenger": "^0.2.6",
     "babel-polyfill": "^6.9.1",
-    "buildo-react-components": "github:buildo/react-components",
+    "buildo-react-components": "github:buildo/react-components#c99a06a12abb472b7931a15fe8b0f38d11959a02",
     "debug": "^2.2.0",
     "intl": "^1.0.1",
     "invariant": "^2.2.0",
@@ -71,8 +71,8 @@
     "node-uuid": "^1.4.7",
     "normalize.css": "^3.0.3",
     "react": "^0.14",
-    "react-avenger": "github:buildo/react-avenger",
-    "react-container": "github:buildo/react-container",
+    "react-avenger": "github:buildo/react-avenger#bdba29393a1ae740aa20c90fb83f30288dbe938a",
+    "react-container": "github:buildo/react-container#7b8b39d0f4827790f711d87206d91032a58e2cf2",
     "react-copy-to-clipboard": "^4.1.0",
     "react-dom": "^0.14",
     "react-input-children": "^1.0.0",
@@ -80,9 +80,9 @@
     "react-router": "^0.13.5",
     "react-sticky": "^5.0.3",
     "revenge": "^0.4.5",
-    "rxjs": "5.0.0-beta.4",
-    "state": "github:buildo/state",
-    "state-react-router": "github:buildo/state-react-router",
+    "rxjs": "5.0.0-beta.8",
+    "state": "github:buildo/state#d9904e3a954911a540b4e879eebf8e5cb3a44ada",
+    "state-react-router": "github:buildo/state-react-router#d456a8fd4d7d43cfa006d12f45a1735bbc39e04a",
     "tcomb-react": "^0.9.0"
   }
 }
