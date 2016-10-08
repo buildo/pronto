@@ -14,7 +14,23 @@ export const restaurants = Query({
   returnType: t.list(Restaurant),
   fetch: () => API.getRestaurants()
     // TODO(gio): not sure about this, Restaurant.is should be enough?
-    .then(restaurants => restaurants.filter(r => r && r.menu && r.open && Restaurant.is(r)))
+    .then(restaurants => {
+      const invalidRestaurants = restaurants.filter(r => !Restaurant.is(r));
+      const closedRestaurants = restaurants.filter(r => Restaurant.is(r) && !r.open);
+
+      invalidRestaurants.forEach((r) => {
+        try {
+          Restaurant(r);
+        } catch (e) {
+          console.error(e); // eslint-disable-line no-console
+        }
+      });
+
+
+      console.log(`\nClosed restaurants:`); // eslint-disable-line no-console
+      console.log(closedRestaurants); // eslint-disable-line no-console
+      return restaurants.filter(r => Restaurant.is(r) && r.open); // open restaurants
+    })
 });
 
 export const restaurant = Query({
