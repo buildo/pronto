@@ -14,10 +14,10 @@ const { restaurant, orders } = require('./firebase');
 
 // listen on orders changes
 // (no need to check order added, because they're added in status == 'pending')
-orders.on('child_changed', data => {
+orders.orderByChild("status").equalTo("submitted").on('value', data => {
   const order = data.val();
-  // if order has been submitted, process it
-  if (order.status === 'submitted') {
+  // if order didn't change from submitted to pending
+  if (order) {
     processOrder(order);
   }
 });
